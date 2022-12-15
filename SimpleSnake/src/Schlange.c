@@ -14,15 +14,22 @@
  */
 void schlange_init (Schlange* schlange_ptr)
 {
-	//Aufgabe 3a)
-	//TODO
+	Liste* liste = liste_erzeugen();
+	schlange_ptr->positionen_ptr = liste;
+	schlange_ptr->punkte = 0;
+	schlange_ptr->wachsen = 0;
 }
 
 Schlange* schlange_erzeugen()
 {
-	//Aufgabe 3b)
-	//TODO
-	return NULL;
+	Schlange* schlange = (Schlange*) malloc(sizeof(Schlange));
+	schlange_init(schlange);
+
+	Liste* liste = (Liste*) malloc(sizeof(Liste));
+	liste->kopf_ptr = NULL;
+	liste->laenge = 0;
+	return liste;
+	//Irgendwas mit return stimmt nicht, keine Ahnung, vielleicht ist es ein Fehler bei Aufgabestellung
 }
 
 

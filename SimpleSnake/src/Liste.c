@@ -25,9 +25,9 @@ void liste_einfuegen_kopf(Liste* liste_ptr, Element* element_ptr)
 
 Element* liste_entferne_ende(Liste* liste_ptr)
 {
-	//Aufgabe 2c)
-	//TODO
-	return NULL;
+	Element* element = liste_ptr->kopf_ptr;
+	liste_ptr->kopf_ptr = liste_ptr->kopf_ptr->nachfolger_ptr;
+	return element;
 }
 
 
