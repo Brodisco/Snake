@@ -21,8 +21,6 @@
 #include "Spiel.h"
 
 int main(void) {
-
-
 	//Startet ncurses und initialisiert es
 	console_init();
 
@@ -34,6 +32,8 @@ int main(void) {
 
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
+	refresh();
+		getchar();
 
 	while(spiel_ptr->run == 1)
 	{
@@ -56,12 +56,14 @@ int main(void) {
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;
 
+		refresh();
 		//Pausieren des Main-Thread - Spielgeschwindigkeit
 		usleep(SPIEL_GESCHWINDIGKEIT);
 	}
 
 	//Warte auf Tastendruck
 	getchar();
+	endwin();
 
 	return EXIT_SUCCESS;
 }
