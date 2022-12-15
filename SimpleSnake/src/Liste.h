@@ -12,6 +12,7 @@
 struct Liste
 {
 	Element* kopf_ptr;
+	Element* schwanz_ptr;
 	int laenge;
 };
 typedef struct Liste Liste;

@@ -20,7 +20,8 @@
 #include "Configuration.h"
 #include "Spiel.h"
 
-int main(void) {
+int main(void)
+{
 
 	//Startet ncurses und initialisiert es
 	console_init();
@@ -37,7 +38,10 @@ int main(void) {
 	while(spiel_ptr->run == 1)
 	{
 		//Einlesen der Eingabe
+		attron(COLOR_PAIR(SPIELFELD_HINTERGRUND_FARBE));
 		eingabe_einlesen(eingabe_ptr);
+
+
 
 		//Zeichne Schlange 1
 		schlange_zeichne(spiel_ptr->s1_ptr, SPIELFELD_HINTERGRUND_FARBE);
@@ -54,6 +58,8 @@ int main(void) {
 
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;
+
+		//getchar();
 
 		//Pausieren des Main-Thread - Spielgeschwindigkeit
 		usleep(SPIEL_GESCHWINDIGKEIT);

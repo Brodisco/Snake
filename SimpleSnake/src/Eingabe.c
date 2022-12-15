@@ -28,6 +28,8 @@ void eingabe_einlesen(struct Eingabe* eingabe_ptr)
 	for (int i = 0; i < 100; i++)
 	{
 		c = getch();
+
+		mvprintw(10, 10, "%d", c);
 		switch (c)
 		{
 			case SPIELER_1_HOCH:

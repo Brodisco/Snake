@@ -14,15 +14,16 @@
  */
 void schlange_init (Schlange* schlange_ptr)
 {
-	//Aufgabe 3a)
-	//TODO
+	schlange_ptr->positionen_ptr = liste_erzeugen();
+	schlange_ptr->punkte = 0;
+	schlange_ptr->wachsen = 0;
 }
 
 Schlange* schlange_erzeugen()
 {
-	//Aufgabe 3b)
-	//TODO
-	return NULL;
+	Schlange *schlange_ptr = (Schlange*) malloc(sizeof(Schlange));
+	schlange_init(schlange_ptr);
+	return schlange_ptr;
 }
 
 
@@ -31,8 +32,35 @@ Schlange* schlange_erzeugen()
  * */
 void schlange_bewege (Schlange* schlange_ptr, int richtung)
 {
-	//Aufgabe 3c)
-	//TODO
+	if (!schlange_ptr->wachsen)
+	{
+		liste_einfuegen_kopf(schlange_ptr->positionen_ptr, liste_entferne_ende(schlange_ptr->positionen_ptr));
+
+	} else {
+		liste_einfuegen_kopf(schlange_ptr->positionen_ptr, element_erzeugen());
+		schlange_ptr->positionen_ptr->laenge--;
+	}
+
+	switch (richtung)
+	{
+		case 0: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x;
+				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y + 1;
+				break;
+
+		case 1: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x + 1;
+				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y;
+				break;
+
+		case 2: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x;
+				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y - 1;
+				break;
+
+		case 3: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x - 1;
+				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y;
+				break;
+
+		default: break;
+	}
 }
 
 /*
@@ -40,9 +68,13 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
  */
 void schlange_zeichne(Schlange* schlange_ptr, int farbe)
 {
-	//Aufgabe 3d)
-	//TODO
-	//attron(COLOR_PAIR(farbe)); //Setzt die Farbe der Schrift und des Hintergrunds
+	Element *element_ptr = schlange_ptr->positionen_ptr->kopf_ptr;
+	attron(COLOR_PAIR(farbe));
+	while(element_ptr->nachfolger_ptr != NULL)
+	{
+		console_zeichne_punkt(element_ptr->pos.x, element_ptr->pos.y, ' ');
+		element_ptr = element_ptr->nachfolger_ptr;
+	}
 }
 
 /*

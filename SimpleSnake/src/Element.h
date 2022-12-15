@@ -14,6 +14,7 @@ struct Element
 {
 	Position pos;
 	struct Element* nachfolger_ptr;
+	struct Element* vorgänger_ptr;
 };
 typedef struct Element Element;
 
