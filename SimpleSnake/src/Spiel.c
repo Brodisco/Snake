@@ -111,11 +111,11 @@ void spiel_pruefe_kollission(Spiel* spiel_ptr)
 	// 6) Schlange 2 in den Rand beißt
 	int s2x = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x;
 	int s2y = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y;
-	// 3a) Linker oder Rechter Rand
+	// 6a) Linker oder Rechter Rand
 	if (s2x <= SPIELFELD_OFFSET_X + 1 || s2x >= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE)) {
 		ergebnis += 1;
 	}
-	// 3b) Linker oder Rechter Rand
+	// 6b) Linker oder Rechter Rand
 	if (s2y <= SPIELFELD_OFFSET_Y + 1 || s2y >= (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE)) {
 		ergebnis += 1;
 	}
