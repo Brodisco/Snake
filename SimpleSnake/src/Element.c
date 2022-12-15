@@ -11,6 +11,7 @@ Element* element_erzeugen()
 	Element* newElement = (Element*) malloc(sizeof(Element));
 
 	newElement->nachfolger_ptr = NULL;
+	newElement->nachfolger_ptr = NULL;
 	newElement->pos.x = 0;
 	newElement->pos.y = 0;
 

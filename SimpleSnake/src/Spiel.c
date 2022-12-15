@@ -13,7 +13,17 @@
 void spiel_init(Spiel* spiel_ptr)
 {
 	//Aufgabe 4a)
-	//TODO
+	// Spieler 1
+	spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x = SPIELER_1_XPOS;
+	spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y = SPIELER_YPOS;
+	spiel_ptr->s1_ptr->wachsen = SPIEL_SCHLANGEN_LAENGE;
+
+	// Spieler 2
+	spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x = SPIELER_2_XPOS;
+	spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y = SPIELER_YPOS;
+	spiel_ptr->s2_ptr->wachsen = SPIEL_SCHLANGEN_LAENGE;
+
+	spiel_ptr->run = 1;
 }
 
 Spiel* spiel_erzeugen()
