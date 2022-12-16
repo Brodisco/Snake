@@ -47,7 +47,7 @@ void spiel_zeichne_rand()
 		console_zeichne_punkt(i + SPIELFELD_OFFSET_X, SPIELFELD_OFFSET_Y, ' ');
 		console_zeichne_punkt(i + SPIELFELD_OFFSET_X, SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE, ' ');
 	}
-	for (int i = 0; i < SPIELFELD_YSIZE; i++)
+	for (int i = 0; i <= SPIELFELD_YSIZE; i++)
 	{
 		console_zeichne_punkt(SPIELFELD_OFFSET_X, SPIELFELD_OFFSET_Y + i, ' ');
 		console_zeichne_punkt(SPIELFELD_OFFSET_X + SPIELFELD_XSIZE, SPIELFELD_OFFSET_Y + i, ' ');
@@ -85,9 +85,18 @@ void spiel_pruefe_kollission(Spiel* spiel_ptr)
 
 	for(int i = 0; i < 2; i++)
 	{
-		if (snake[i]->pos.x >= SPIELFELD_OFFSET_X && snake[i]->pos.y <= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE))
+		if(snake[i]->pos.x >= SPIELFELD_OFFSET_X && snake[i]->pos.x <= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE) )
 		{
-			if(snake[i]->pos.y == SPIELFELD_OFFSET_Y || snake[i]->pos.y == (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE))
+			if (snake[i]->pos.y == SPIELFELD_OFFSET_Y || snake[i]->pos.y == (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE))
+			{
+				spiel_ptr->run = 0;
+				return;
+			}
+		}
+
+		if (snake[i]->pos.y >= SPIELFELD_OFFSET_Y && snake[i]->pos.y <= (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE))
+		{
+			if (snake[i]->pos.x == SPIELFELD_OFFSET_X || snake[i]->pos.x == (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE))
 			{
 				spiel_ptr->run = 0;
 				return;
