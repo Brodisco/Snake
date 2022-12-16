@@ -56,7 +56,6 @@ void eingabe_einlesen(struct Eingabe* eingabe_ptr)
 				break;
 			default:
 				break;
-
 				//UNGÜLTIG / UNBEKANNT
 		}
 

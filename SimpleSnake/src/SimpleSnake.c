@@ -20,31 +20,31 @@
 #include "Configuration.h"
 #include "Spiel.h"
 #include <unistd.h>
-/*test
+/*
 int main (void)
 {
 	//Startet ncurses und initialisiert es
 	console_init();
-	printw("  sadsad");
 
 	Schlange* s_ptr = schlange_erzeugen();
+
 	Element* e_ptr = element_erzeugen();
 	e_ptr->pos.x = 10;
 	e_ptr->pos.y = 10;
 
 	liste_einfuegen_kopf(s_ptr->positionen_ptr, e_ptr);
 
-	schlange_zeichne (s_ptr, SPIELER_2_FARBE);
-
+	schlange_zeichne(s_ptr, SPIELER_2_FARBE);
 	getchar();
 	schlange_zeichne(s_ptr, SPIELFELD_HINTERGRUND_FARBE);
 	schlange_bewege(s_ptr, BEWEGUNG_LINKS);
 	schlange_zeichne(s_ptr, SPIELER_2_FARBE);
 	getchar();
+	return 0;
 }
 */
 
-int mainx(void) {
+int main(void) {
 
 	//Startet ncurses und initialisiert es
 	console_init();

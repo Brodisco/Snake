@@ -33,10 +33,11 @@ Schlange* schlange_erzeugen()
  * */
 void schlange_bewege (Schlange* schlange_ptr, int richtung)
 {
-	int x = 0;
-	int y = 0;
+	int x, y;
+
 	Element* element_ptr = (Element*) malloc(sizeof(Element));
 	Element* ende_ptr;
+
 	x = schlange_ptr->positionen_ptr->kopf_ptr->pos.x;
 	y = schlange_ptr->positionen_ptr->kopf_ptr->pos.y;
 
@@ -88,6 +89,15 @@ void schlange_zeichne(Schlange* schlange_ptr, int farbe)
 {
 	attron(COLOR_PAIR(farbe));
 	int x, y;
+/* Mögliche Lösung, aber gibts noch Seg Fault auf 41, keine Ahnung mehr...
+	while(schlange_ptr->positionen_ptr->kopf_ptr != NULL)
+	{
+		x = schlange_ptr->positionen_ptr->kopf_ptr->pos.x;
+		y = schlange_ptr->positionen_ptr->kopf_ptr->pos.y;
+		console_zeichne_punkt(x, y, ' ');
+		schlange_ptr->positionen_ptr->kopf_ptr = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr;
+	}*/
+
 	Element* element_ptr = schlange_ptr->positionen_ptr->kopf_ptr;
 	while(element_ptr != NULL)
 	{
