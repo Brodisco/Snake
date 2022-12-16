@@ -94,7 +94,6 @@ void spiel_pruefe_kollission(Spiel* spiel_ptr)
 			}
 		}
 	}
-
 }
 
 void spiel_zeichne_spielstand()

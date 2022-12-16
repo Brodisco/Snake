@@ -11,9 +11,7 @@ Element* element_erzeugen()
 	element->pos.x = 0;
 	element->pos.y = 0;
 	element->nachfolger_ptr = NULL;
-
 	element->vorgaenger_ptr = NULL;
-
 	return element;
 }
 /* Prüfe, ob e1 mit einem seiner Nachfolger übereinstimmt */

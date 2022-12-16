@@ -20,7 +20,6 @@
 #include "Configuration.h"
 #include "Spiel.h"
 
-
 int main(void) {
 	//Startet ncurses und initialisiert es
 	console_init();

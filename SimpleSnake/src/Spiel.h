@@ -8,13 +8,6 @@
 #ifndef SPIEL_H_
 #define SPIEL_H_
 #include "Schlange.h"
-
-#define X_OFFSET 10
-#define Y_OFFSET 10
-
-#define BREITE 20
-#define HOHE 20
-
 struct Spiel
 {
 	Schlange* s1_ptr;
