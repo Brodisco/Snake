@@ -41,11 +41,6 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 	x = schlange_ptr->positionen_ptr->kopf_ptr->pos.x;
 	y = schlange_ptr->positionen_ptr->kopf_ptr->pos.y;
 
-	if(schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr == NULL)
-	{
-		ende_ptr = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr;
-	}
-
 	switch (richtung)
 	{
 		case BEWEGUNG_HOCH:
@@ -66,13 +61,11 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 	element_ptr->pos.x = x;
 	element_ptr->pos.y = y;
 
-	liste_einfuegen_kopf(schlange_ptr->positionen_ptr, element_ptr);
-
 	if(schlange_ptr->wachsen > 0)
 	{
 		schlange_ptr->wachsen--;
 	}
-	else if(schlange_ptr->wachsen == 0)
+	else if(schlange_ptr->wachsen <= 0)
 	{
 		ende_ptr = liste_entferne_ende(schlange_ptr->positionen_ptr);
 			if(ende_ptr != NULL)
@@ -80,6 +73,7 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 				free(ende_ptr);
 			}
 	}
+	liste_einfuegen_kopf(schlange_ptr->positionen_ptr, element_ptr);
 }
 
 /*
@@ -89,16 +83,8 @@ void schlange_zeichne(Schlange* schlange_ptr, int farbe)
 {
 	attron(COLOR_PAIR(farbe));
 	int x, y;
-/* Mögliche Lösung, aber gibts noch Seg Fault auf 41, keine Ahnung mehr...
-	while(schlange_ptr->positionen_ptr->kopf_ptr != NULL)
-	{
-		x = schlange_ptr->positionen_ptr->kopf_ptr->pos.x;
-		y = schlange_ptr->positionen_ptr->kopf_ptr->pos.y;
-		console_zeichne_punkt(x, y, ' ');
-		schlange_ptr->positionen_ptr->kopf_ptr = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr;
-	}*/
-
 	Element* element_ptr = schlange_ptr->positionen_ptr->kopf_ptr;
+
 	while(element_ptr != NULL)
 	{
 		x = element_ptr->pos.x;

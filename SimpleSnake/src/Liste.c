@@ -23,18 +23,18 @@ void liste_einfuegen_kopf(Liste* liste_ptr, Element* element_ptr)
 
 Element* liste_entferne_ende(Liste* liste_ptr)
 {
-	Element* element_ptr = liste_ptr->kopf_ptr;
+	Element* vorletzteElement_ptr = liste_ptr->kopf_ptr;
+	Element* letzteElement_ptr;
 
-	while(element_ptr != NULL)
+	for(int i = 1; i < liste_ptr->laenge-1; i++)
 	{
-		if(element_ptr->nachfolger_ptr == NULL)
-		{
-			free(element_ptr->nachfolger_ptr);
-			break;
-		}
-		element_ptr = element_ptr->nachfolger_ptr;
+		vorletzteElement_ptr = vorletzteElement_ptr->nachfolger_ptr;
 	}
 
-	return element_ptr;
+	letzteElement_ptr = vorletzteElement_ptr->nachfolger_ptr;
+	vorletzteElement_ptr->nachfolger_ptr = NULL;
+	liste_ptr->laenge--;
+
+	return letzteElement_ptr;
 }
 
