@@ -18,14 +18,14 @@ Eingabe* eingabe_erzeugen ()
 
 void eingabe_init(struct Eingabe* eingabe_ptr)
 {
-	eingabe_ptr->letzte_eingabe_spieler_1 = BEWEGUNG_RECHTS;
-	eingabe_ptr->letzte_eingabe_spieler_2 = BEWEGUNG_LINKS;
+	eingabe_ptr->letzte_eingabe_spieler_1 = 1;
+	eingabe_ptr->letzte_eingabe_spieler_2 = 1;
 }
 
 void eingabe_einlesen(struct Eingabe* eingabe_ptr)
 {
 	char c = 'X';
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i <  1; i++)
 	{
 		c = getch();
 

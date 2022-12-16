@@ -37,7 +37,7 @@ int main(void)
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
 
-	//refresh();
+	//refresh();c
 
 
 	while(spiel_ptr->run == 1)
@@ -56,6 +56,7 @@ int main(void)
 		schlange_zeichne(spiel_ptr->s1_ptr, SPIELER_1_FARBE);
 
 		//Zeichne Schlange 2
+
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELFELD_HINTERGRUND_FARBE);
 		schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
