@@ -29,3 +29,4 @@ char element_folge_pruefen (Element* pruef_ptr, Element* e_ptr)
 	}
 	return Ergebnis;
 }
+

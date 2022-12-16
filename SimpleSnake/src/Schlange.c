@@ -14,22 +14,17 @@
  */
 void schlange_init (Schlange* schlange_ptr)
 {
-	Liste* liste = liste_erzeugen();
-	schlange_ptr->positionen_ptr = liste;
+	Liste* liste_ptr = liste_erzeugen();
+	schlange_ptr->positionen_ptr = liste_ptr;
 	schlange_ptr->punkte = 0;
 	schlange_ptr->wachsen = 0;
 }
 
 Schlange* schlange_erzeugen()
 {
-	Schlange* schlange = (Schlange*) malloc(sizeof(Schlange));
-	schlange_init(schlange);
-
-	Liste* liste = (Liste*) malloc(sizeof(Liste));
-	liste->kopf_ptr = NULL;
-	liste->laenge = 0;
-	return liste;
-	//Irgendwas mit return stimmt nicht, keine Ahnung, vielleicht ist es ein Fehler bei Aufgabestellung
+	Schlange* schlange_ptr = (Schlange*) malloc(sizeof(Schlange));
+	schlange_init(schlange_ptr);
+	return schlange_ptr;
 }
 
 
@@ -38,8 +33,52 @@ Schlange* schlange_erzeugen()
  * */
 void schlange_bewege (Schlange* schlange_ptr, int richtung)
 {
-	//Aufgabe 3c)
-	//TODO
+	int x = 0;
+	int y = 0;
+	Element* element_ptr = (Element*) malloc(sizeof(Element));
+	Element* ende_ptr;
+	x = schlange_ptr->positionen_ptr->kopf_ptr->pos.x;
+	y = schlange_ptr->positionen_ptr->kopf_ptr->pos.y;
+
+	if(schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr == NULL)
+	{
+		ende_ptr = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr;
+	}
+
+	switch (richtung)
+	{
+		case BEWEGUNG_HOCH:
+			y--;
+			break;
+		case BEWEGUNG_RECHTS:
+			x++;;
+			break;
+		case BEWEGUNG_RUNTER:
+			y++;
+			break;
+		case BEWEGUNG_LINKS:
+			x--;
+			break;
+		default:
+			break;
+	}
+	element_ptr->pos.x = x;
+	element_ptr->pos.y = y;
+
+	liste_einfuegen_kopf(schlange_ptr->positionen_ptr, element_ptr);
+
+	if(schlange_ptr->wachsen > 0)
+	{
+		schlange_ptr->wachsen--;
+	}
+	else if(schlange_ptr->wachsen == 0)
+	{
+		ende_ptr = liste_entferne_ende(schlange_ptr->positionen_ptr);
+			if(ende_ptr != NULL)
+			{
+				free(ende_ptr);
+			}
+	}
 }
 
 /*
@@ -47,9 +86,16 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
  */
 void schlange_zeichne(Schlange* schlange_ptr, int farbe)
 {
-	//Aufgabe 3d)
-	//TODO
-	//attron(COLOR_PAIR(farbe)); //Setzt die Farbe der Schrift und des Hintergrunds
+	attron(COLOR_PAIR(farbe));
+	int x, y;
+	Element* element_ptr = schlange_ptr->positionen_ptr->kopf_ptr;
+	while(element_ptr != NULL)
+	{
+		x = element_ptr->pos.x;
+		y = element_ptr->pos.y;
+		console_zeichne_punkt(x, y, ' ');
+		element_ptr = element_ptr->nachfolger_ptr;
+	}
 }
 
 /*

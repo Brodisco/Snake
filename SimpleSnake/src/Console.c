@@ -51,6 +51,7 @@ void console_cursor_zeigen()
 void console_zeichne_punkt(int x, int y, char c)
 {
 	mvaddch(y, x, c);
+	refresh();
 }
 
 //Positioniere Cursor an Position x,y

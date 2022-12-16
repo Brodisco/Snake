@@ -18,9 +18,9 @@ void spiel_init(Spiel* spiel_ptr)
 
 Spiel* spiel_erzeugen()
 {
-	//Aufgabe 4b)
-	//TODO
-	return NULL;
+	Spiel* spiel = (Spiel*) malloc(sizeof(Spiel));
+	spiel_init(spiel);
+	return spiel;
 }
 
 void spiel_zeichne_rand()
