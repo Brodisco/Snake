@@ -8,37 +8,30 @@
 #include "Liste.h"
 Liste* liste_erzeugen()
 {
-	//Aufgabe 2a)
-	Liste* newList = (Liste*) malloc(sizeof(Liste));
-	newList->kopf_ptr = NULL;
-	newList->ende_ptr = NULL;
-	newList->laenge = 0;
-
-	return newList;
+	Liste *list = (Liste*) malloc(sizeof(Liste));
+	list->kopf_ptr = NULL;
+	list->ende_ptr = NULL;
+	list->laenge = 0;
+	return list;
 }
 
 void liste_einfuegen_kopf(Liste* liste_ptr, Element* element_ptr)
 {
-	//Aufgabe 2b)
-	if (liste_ptr->laenge == 0) {
-		// Erstes Element in der Liste -> Ende der Liste setzen
-		liste_ptr->ende_ptr = element_ptr;
-	} else {
-		// Es gibt schon Elemente -> Vorgänger vom alten Kopf setzen
-		liste_ptr->kopf_ptr->vorgaenger_ptr = element_ptr;
-	}
-
 	element_ptr->nachfolger_ptr = liste_ptr->kopf_ptr;
-	element_ptr->vorgaenger_ptr = NULL;
-
-	liste_ptr->kopf_ptr = element_ptr;
-	liste_ptr->laenge++;
+	if (element_ptr->nachfolger_ptr == NULL)
+	{
+		liste_ptr->kopf_ptr = element_ptr;
+		liste_ptr->ende_ptr = element_ptr;
+		liste_ptr->laenge++;
+	} else {
+		liste_ptr->kopf_ptr = element_ptr;
+		element_ptr->nachfolger_ptr->vorgaenger_ptr = element_ptr;
+		liste_ptr->laenge++;
+	}
 }
 
 Element* liste_entferne_ende(Liste* liste_ptr)
 {
-	//Aufgabe 2c)
-
 	Element* letztesElement = liste_ptr->ende_ptr;
 	letztesElement->vorgaenger_ptr->nachfolger_ptr = NULL;
 	liste_ptr->ende_ptr = letztesElement->vorgaenger_ptr;

@@ -12,27 +12,18 @@
 
 void spiel_init(Spiel* spiel_ptr)
 {
-	//Aufgabe 4a)
-	// Spieler 1
 	spiel_ptr->s1_ptr = schlange_erzeugen();
-
-	Element* kopfS1 = element_erzeugen();
-	kopfS1->pos.x = SPIELER_1_XPOS;
-	kopfS1->pos.y = SPIELER_YPOS;
-
-	liste_einfuegen_kopf(spiel_ptr->s1_ptr->positionen_ptr, kopfS1);
-
-	spiel_ptr->s1_ptr->wachsen = SPIEL_SCHLANGEN_LAENGE;
-
-	// Spieler 2
 	spiel_ptr->s2_ptr = schlange_erzeugen();
 
-	Element* kopfS2 = element_erzeugen();
-	kopfS2->pos.x = SPIELER_2_XPOS;
-	kopfS2->pos.y = SPIELER_YPOS;
+	liste_einfuegen_kopf(spiel_ptr->s1_ptr->positionen_ptr, element_erzeugen());
+	liste_einfuegen_kopf(spiel_ptr->s2_ptr->positionen_ptr, element_erzeugen());
 
-	liste_einfuegen_kopf(spiel_ptr->s2_ptr->positionen_ptr, kopfS2);
+	spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x = SPIELER_1_XPOS;
+	spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y = SPIELER_YPOS;
+	spiel_ptr->s1_ptr->wachsen = SPIEL_SCHLANGEN_LAENGE;
 
+	spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x = SPIELER_2_XPOS;
+	spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y = SPIELER_YPOS;
 	spiel_ptr->s2_ptr->wachsen = SPIEL_SCHLANGEN_LAENGE;
 
 	spiel_ptr->run = 1;
@@ -40,87 +31,68 @@ void spiel_init(Spiel* spiel_ptr)
 
 Spiel* spiel_erzeugen()
 {
-	//Aufgabe 4b)
-	Spiel* neuesSpiel = (Spiel*) malloc(sizeof(Spiel));
-	spiel_init(neuesSpiel);
-
-	return neuesSpiel;
+	Spiel *spiel_ptr = (Spiel*) malloc(sizeof(spiel_ptr));
+	spiel_init(spiel_ptr);
+	return spiel_ptr;
 }
 
 void spiel_zeichne_rand()
 {
-	//Aufgabe 4c)
 	attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
 
-	// Oben zeichnen
-	for (int x = SPIELFELD_OFFSET_X; x <= SPIELFELD_XSIZE + SPIELFELD_OFFSET_X + 1; x++) {
-		console_zeichne_punkt(x, SPIELFELD_OFFSET_Y, ' ');
+
+
+	for (int i = 0; i < SPIELFELD_XSIZE; i++)
+	{
+		console_zeichne_punkt(i + SPIELFELD_OFFSET_X, SPIELFELD_OFFSET_Y, ' ');
+		console_zeichne_punkt(i + SPIELFELD_OFFSET_X, SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE, ' ');
 	}
-	// Rechts zeichnen
-	for (int y = SPIELFELD_OFFSET_Y+1; y <= SPIELFELD_YSIZE + SPIELFELD_OFFSET_Y; y++) {
-		console_zeichne_punkt(SPIELFELD_OFFSET_X + SPIELFELD_XSIZE + 1, y, ' ');
-	}
-	// Unten zeichnen
-	for (int x = SPIELFELD_OFFSET_X; x <= SPIELFELD_XSIZE + SPIELFELD_OFFSET_X + 1; x++) {
-		console_zeichne_punkt(x, SPIELFELD_OFFSET_Y+SPIELFELD_YSIZE+1, ' ');
-	}
-	// Links zeichnen
-	for (int y = SPIELFELD_OFFSET_Y+1; y <= SPIELFELD_YSIZE + SPIELFELD_OFFSET_Y; y++) {
-		console_zeichne_punkt(SPIELFELD_OFFSET_X, y, ' ');
+	for (int i = 0; i < SPIELFELD_YSIZE; i++)
+	{
+		console_zeichne_punkt(SPIELFELD_OFFSET_X, SPIELFELD_OFFSET_Y + i, ' ');
+		console_zeichne_punkt(SPIELFELD_OFFSET_X + SPIELFELD_XSIZE, SPIELFELD_OFFSET_Y + i, ' ');
 	}
 }
 
 void spiel_pruefe_kollission(Spiel* spiel_ptr)
 {
-	//Aufgabe 4d)
-	/*
-	1) Schlange 1 Schlange 2 beißt
-	2) Schlange 1 sich selbst beißt
-	3) Schlange 1 in den Rand beißt
-	4) Schlange 2 Schlange 1 beißt
-	5) Schlange 2 sich selbst beißt
-	6) Schlange 2 in den Rand beißt
-	*/
+	Element *snake[2] = { 	spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr,
+							spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr};
 
-	char ergebnis = 0;
-
-	// 1) Schlange 1 Schlange 2 beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr);
-
-	//2) Schlange 1 sich selbst beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
-
-	// 3) Schlange 1 in den Rand beißt
-	int s1x = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x;
-	int s1y = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y;
-	// 3a) Linker oder Rechter Rand
-	if (s1x <= SPIELFELD_OFFSET_X + 1 || s1x >= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE)) {
-		ergebnis += 1;
-	}
-	// 3b) Linker oder Rechter Rand
-	if (s1y <= SPIELFELD_OFFSET_Y + 1 || s1y >= (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE)) {
-		ergebnis += 1;
-	}
-
-	// 4) Schlange 2 Schlange 1 beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr);
-
-	// 5) Schlange 2 sich selbst beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
-
-	// 6) Schlange 2 in den Rand beißt
-	int s2x = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x;
-	int s2y = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y;
-	// 6a) Linker oder Rechter Rand
-	if (s2x <= SPIELFELD_OFFSET_X + 1 || s2x >= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE)) {
-		ergebnis += 1;
-	}
-	// 6b) Linker oder Rechter Rand
-	if (s2y <= SPIELFELD_OFFSET_Y + 1 || s2y >= (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE)) {
-		ergebnis += 1;
-	}
-	if (ergebnis >= 1) {
+	if (element_folge_pruefen(snake[0], snake[1]))
+	{
 		spiel_ptr->run = 0;
+		return;
+	}
+
+	if (element_folge_pruefen(snake[1], snake[0]))
+	{
+		spiel_ptr->run = 0;
+		return;
+	}
+
+	if (element_folge_pruefen(snake[0], snake[0]->nachfolger_ptr))
+	{
+		spiel_ptr->run = 0;
+		return;
+	}
+
+	if (element_folge_pruefen(snake[1], snake[1]->nachfolger_ptr))
+	{
+		spiel_ptr->run = 0;
+		return;
+	}
+
+	for(int i = 0; i < 2; i++)
+	{
+		if (snake[i]->pos.x >= SPIELFELD_OFFSET_X && snake[i]->pos.y <= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE))
+		{
+			if(snake[i]->pos.y == SPIELFELD_OFFSET_Y || snake[i]->pos.y == (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE))
+			{
+				spiel_ptr->run = 0;
+				return;
+			}
+		}
 	}
 }
 
