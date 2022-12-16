@@ -2,7 +2,7 @@
  * Spiel.h
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Mario Wegmann
  */
 
 #ifndef SPIEL_H_

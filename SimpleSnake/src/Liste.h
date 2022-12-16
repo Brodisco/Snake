@@ -2,7 +2,7 @@
  * Liste.h
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Mario Wegmann
  */
 
 #ifndef LISTE_H

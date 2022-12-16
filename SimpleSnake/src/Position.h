@@ -2,7 +2,7 @@
  * Position.h
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Mario Wegmann
  */
 
 #ifndef POSITION_H

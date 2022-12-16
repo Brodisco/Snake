@@ -2,7 +2,7 @@
  * Element.h
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Mario Wegmann
  */
 
 #ifndef ELEMENT_H_

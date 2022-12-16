@@ -1,3 +1,9 @@
+/*
+ *  Console.h
+ *
+ *  Created on: 12.12.2022
+ *      Author: Mario Wegmann
+ */
 #ifndef CONSOLE_H
 #define CONSOLE_H
 

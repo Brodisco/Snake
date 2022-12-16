@@ -1,3 +1,10 @@
+/*
+ *  Configuration.h
+ *
+ *  Created on: 12.12.2022
+ *      Author: Mario Wegmann
+ */
+
 #include <ncurses.h>
 
 //Farben - Übersicht

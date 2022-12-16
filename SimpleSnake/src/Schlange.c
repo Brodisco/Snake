@@ -2,7 +2,7 @@
  * Schlange.c
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Mario Wegmann
  */
 #include <stdlib.h>
 #include "Configuration.h"

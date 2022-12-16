@@ -1,10 +1,9 @@
 /*
  ============================================================================
  Name        : SimpleSnake.c
- Author      : StudentT
+ Author      : Mario Wegmann
  Version     :
  Copyright   : Hochschule Augsburg
- Description : Hello World in C, Ansi-style
  ============================================================================
  */
 
