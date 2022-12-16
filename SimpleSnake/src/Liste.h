@@ -12,7 +12,9 @@
 struct Liste
 {
 	Element* kopf_ptr;
-	Element* schwanz_ptr;
+
+	Element* ende_ptr;
+
 	int laenge;
 };
 typedef struct Liste Liste;

@@ -43,25 +43,28 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 
 	switch (richtung)
 	{
-		case 0: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x;
+
+		case 2: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x;
 				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y + 1;
 				break;
 
-		case 1: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x + 1;
+		case 3: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x + 1;
 				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y;
 				break;
 
-		case 2: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x;
+		case 0: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x;
 				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y - 1;
 				break;
 
-		case 3: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x - 1;
+		case 1: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x - 1;
+
 				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y;
 				break;
 
 		default: break;
 	}
 }
+
 
 /*
  * Zeichnet die Schlange auf der Konsole

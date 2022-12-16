@@ -20,13 +20,10 @@
 #include "Configuration.h"
 #include "Spiel.h"
 
-int main(void)
-{
 
+int main(void) {
 	//Startet ncurses und initialisiert es
 	console_init();
-	char c = 0;
-
 
 	//Zeichne den Spielfeldrand
 	spiel_zeichne_rand();
@@ -36,19 +33,13 @@ int main(void)
 
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
-
-	//refresh();c
-
+	refresh();
+		getchar();
 
 	while(spiel_ptr->run == 1)
 	{
 		//Einlesen der Eingabe
-
-		attron(COLOR_PAIR(SPIELFELD_HINTERGRUND_FARBE));
-
 		eingabe_einlesen(eingabe_ptr);
-
-
 
 		//Zeichne Schlange 1
 		schlange_zeichne(spiel_ptr->s1_ptr, SPIELFELD_HINTERGRUND_FARBE);
@@ -56,7 +47,6 @@ int main(void)
 		schlange_zeichne(spiel_ptr->s1_ptr, SPIELER_1_FARBE);
 
 		//Zeichne Schlange 2
-
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELFELD_HINTERGRUND_FARBE);
 		schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
@@ -67,16 +57,14 @@ int main(void)
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;
 
-		getchar();
-
 		refresh();
-
 		//Pausieren des Main-Thread - Spielgeschwindigkeit
 		usleep(SPIEL_GESCHWINDIGKEIT);
 	}
 
 	//Warte auf Tastendruck
 	getchar();
+	endwin();
 
 	return EXIT_SUCCESS;
 }
