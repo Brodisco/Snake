@@ -43,6 +43,7 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 
 	switch (richtung)
 	{
+
 		case 2: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x;
 				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y + 1;
 				break;
@@ -56,6 +57,7 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 				break;
 
 		case 1: schlange_ptr->positionen_ptr->kopf_ptr->pos.x = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.x - 1;
+
 				schlange_ptr->positionen_ptr->kopf_ptr->pos.y = schlange_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr->pos.y;
 				break;
 
