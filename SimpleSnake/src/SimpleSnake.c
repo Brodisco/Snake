@@ -33,7 +33,7 @@ int main(void) {
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
 	refresh();
-		getchar();
+	getchar();
 
 	while(spiel_ptr->run == 1)
 	{
