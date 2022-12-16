@@ -25,6 +25,8 @@ int main(void)
 
 	//Startet ncurses und initialisiert es
 	console_init();
+	char c = 0;
+
 
 	//Zeichne den Spielfeldrand
 	spiel_zeichne_rand();
@@ -35,12 +37,15 @@ int main(void)
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
 
-	refresh();
+	//refresh();
+
 
 	while(spiel_ptr->run == 1)
 	{
 		//Einlesen der Eingabe
+
 		attron(COLOR_PAIR(SPIELFELD_HINTERGRUND_FARBE));
+
 		eingabe_einlesen(eingabe_ptr);
 
 
@@ -61,7 +66,7 @@ int main(void)
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;
 
-		//getchar();
+		getchar();
 
 		refresh();
 

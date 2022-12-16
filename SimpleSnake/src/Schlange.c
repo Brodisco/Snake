@@ -32,13 +32,13 @@ Schlange* schlange_erzeugen()
  * */
 void schlange_bewege (Schlange* schlange_ptr, int richtung)
 {
-	if (!schlange_ptr->wachsen)
+	if (schlange_ptr->wachsen == 0)
 	{
 		liste_einfuegen_kopf(schlange_ptr->positionen_ptr, liste_entferne_ende(schlange_ptr->positionen_ptr));
 
 	} else {
 		liste_einfuegen_kopf(schlange_ptr->positionen_ptr, element_erzeugen());
-		schlange_ptr->positionen_ptr->laenge--;
+		schlange_ptr->wachsen--;
 	}
 
 	switch (richtung)
