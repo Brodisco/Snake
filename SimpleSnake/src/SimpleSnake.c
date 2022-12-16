@@ -23,6 +23,9 @@
 int main(void) {
 	//Startet ncurses und initialisiert es
 	console_init();
+	console_zeichne_startscreen();
+	getchar();
+	console_leeren();
 
 	//Zeichne den Spielfeldrand
 	spiel_zeichne_rand();
@@ -32,8 +35,6 @@ int main(void) {
 
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
-	refresh();
-		getchar();
 
 	while(spiel_ptr->run == 1)
 	{

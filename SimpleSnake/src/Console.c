@@ -28,6 +28,32 @@ void console_init()
 	console_cursor_verstecken();
 }
 
+void console_zeichne_startscreen() {
+	printw("    /^\\/^\\\n");
+	printw("  _|__|  O|\n");
+	printw("\\/     /~     \\_/ \\\n");
+	printw("\\____|__________/  \\\n");
+	printw(" \\_______      \\\n");
+	printw("         `\\     \\                 \\\n");
+	printw("           |     |                  \\\n");
+	printw("          /      /                    \\\n");
+	printw("         /     /                       \\\n");
+	printw("       /      /                         \\ \\\n");
+	printw("      /     /                            \\  \\\n");
+	printw("    /     /             _----_            \\   \\\n");
+	printw("   /     /           _-~      ~-_         |   |\n");
+	printw("  (      (        _-~    _--_    ~-_     _/   |\n");
+	printw("   \\      ~-____-~    _-~    ~-_    ~-_-~    /\n");
+	printw("     ~-_           _-~          ~-_       _-\n");
+	printw("        ~--______-~                ~-___-\n");
+	printw("\n");
+	printw("Spieler 1: W A S D Spieler 2: I J K L\n");
+	printw("\n");
+	printw("Beliebige Taste druecken zum Starten!");
+
+	refresh();
+}
+
 
 //Leere Terminal
 void console_leeren()
