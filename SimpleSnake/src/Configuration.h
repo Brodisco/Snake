@@ -31,10 +31,10 @@
 #define SPIELER_1_LINKS		'a'
 #define SPIELER_1_RUNTER	's'
 #define SPIELER_1_RECHTS	'd'
-#define SPIELER_2_HOCH		'8'
-#define SPIELER_2_LINKS		'4'
-#define SPIELER_2_RUNTER	'5'
-#define SPIELER_2_RECHTS	'6'
+#define SPIELER_2_HOCH		'i'
+#define SPIELER_2_LINKS		'j'
+#define SPIELER_2_RUNTER	'k'
+#define SPIELER_2_RECHTS	'l'
 
 
 //Punktestand
@@ -48,6 +48,6 @@
 #define BEWEGUNG_RECHTS	3
 
 //Spiel
-#define SPIEL_GESCHWINDIGKEIT 	10000
+#define SPIEL_GESCHWINDIGKEIT 	100000
 #define SPIEL_SCHLANGEN_LAENGE 	10
 
