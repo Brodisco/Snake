@@ -20,5 +20,6 @@ Liste* liste_erzeugen();
 
 void liste_einfuegen_kopf(Liste* liste_ptr, Element* element_ptr);
 Element* liste_entferne_ende(Liste* liste_ptr);
+void liste_entferne_element_at_adress(Liste *liste_ptr, Element *element_ptr);
 
 #endif /* LISTE_H_ */

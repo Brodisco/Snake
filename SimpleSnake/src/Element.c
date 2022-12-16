@@ -28,3 +28,19 @@ char element_folge_pruefen (Element* pruef_ptr, Element* e_ptr)
 	}
 	return 0;
 }
+
+
+Element *element_folge_pruefen_index (Element *pruef_ptr, Element *e_ptr)
+{
+
+	while(e_ptr != NULL)
+	{
+		if (e_ptr->pos.x == pruef_ptr->pos.x && e_ptr->pos.y == pruef_ptr->pos.y)
+		{
+			return e_ptr;
+		} else {
+			e_ptr = e_ptr->nachfolger_ptr;
+		}
+	}
+	return NULL;
+}

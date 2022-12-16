@@ -18,7 +18,9 @@
 #include "Console.h"
 #include "Eingabe.h"
 #include "Configuration.h"
+#include "pickup.h"
 #include "Spiel.h"
+
 
 int main(void) {
 	//Startet ncurses und initialisiert es
@@ -32,6 +34,9 @@ int main(void) {
 
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
+
+	init_pickup(spiel_ptr);
+
 	refresh();
 	getchar();
 
@@ -50,8 +55,16 @@ int main(void) {
 		schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
 
+		print_Pickup(spiel_ptr->pickup_ptr, SPIELFELD_HINTERGRUND_FARBE);
+		plaziere_Pickup(spiel_ptr);
+		print_Pickup(spiel_ptr->pickup_ptr, SPIELER_1_FARBE);
+
+
+
 		//Prüfe auf Kollission => Relevant für Spielende
 		spiel_pruefe_kollission(spiel_ptr);
+
+		handle_pickup_conflict(spiel_ptr);
 
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;

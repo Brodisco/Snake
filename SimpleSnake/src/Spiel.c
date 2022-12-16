@@ -7,6 +7,7 @@
 #include "Configuration.h"
 #include "Console.h"
 #include "Spiel.h"
+#include <time.h>
 #include <stdlib.h>
 #include <ncurses.h>
 
@@ -110,4 +111,6 @@ void spiel_zeichne_spielstand()
 	//Aufgabe 4e)     OPTIONAL
 	//TODO
 }
+
+
 

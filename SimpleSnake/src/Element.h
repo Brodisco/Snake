@@ -20,5 +20,6 @@ typedef struct Element Element;
 
 Element* element_erzeugen();
 char element_folge_pruefen (Element* pruef_ptr, Element* e_ptr);
+Element *element_folge_pruefen_index (Element *pruef_ptr, Element *e_ptr);
 
 #endif /* ELEMENT_H_ */
