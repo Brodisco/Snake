@@ -35,6 +35,8 @@ int main(void)
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
 
+	refresh();
+
 	while(spiel_ptr->run == 1)
 	{
 		//Einlesen der Eingabe
@@ -60,6 +62,8 @@ int main(void)
 		spiel_ptr->schritte++;
 
 		//getchar();
+
+		refresh();
 
 		//Pausieren des Main-Thread - Spielgeschwindigkeit
 		usleep(SPIEL_GESCHWINDIGKEIT);
