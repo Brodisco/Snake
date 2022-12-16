@@ -11,7 +11,7 @@
 #define FARBE_WEISS             COLOR_WEISS
 
 //Spielfeld
-#define SPIELFELD_OFFSET_Y		3
+#define SPIELFELD_OFFSET_Y		5
 #define SPIELFELD_OFFSET_X		5
 #define SPIELFELD_YSIZE			50
 #define SPIELFELD_XSIZE			50
