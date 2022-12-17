@@ -20,6 +20,7 @@
 #include "Configuration.h"
 #include "pickup.h"
 #include "Spiel.h"
+#include "spielstand.h"
 
 
 int main(void) {
@@ -35,6 +36,8 @@ int main(void) {
 	//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 	Spiel* spiel_ptr = spiel_erzeugen();
 
+	Spielstand *spielstand_ptr = inti_PixelGruppe(5, 1);
+
 	init_pickup(spiel_ptr);
 
 	refresh();
@@ -42,6 +45,8 @@ int main(void) {
 
 	while(spiel_ptr->run == 1)
 	{
+
+		update_Spielstand(spielstand_ptr, spiel_ptr);
 		//Einlesen der Eingabe
 		eingabe_einlesen(eingabe_ptr);
 
@@ -65,6 +70,10 @@ int main(void) {
 		spiel_pruefe_kollission(spiel_ptr);
 
 		handle_pickup_conflict(spiel_ptr);
+
+
+
+
 
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;

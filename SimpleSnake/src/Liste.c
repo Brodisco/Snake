@@ -43,7 +43,6 @@ Element* liste_entferne_ende(Liste* liste_ptr)
 void liste_entferne_element_at_adress(Liste *liste_ptr, Element *element_ptr)
 {
 	Element *local_element = liste_ptr->kopf_ptr;
-	static int counter = 0;
 
 	while(local_element != NULL)
 	{
@@ -76,8 +75,6 @@ void liste_entferne_element_at_adress(Liste *liste_ptr, Element *element_ptr)
 
 			free(local_element);
 
-			mvprintw(2,2, "Element %d gelöschte\n", counter);
-			counter++;
 			return;
 
 		}
