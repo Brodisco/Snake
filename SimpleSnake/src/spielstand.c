@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <string.h>
+#include <math.h>
 #include "spielstand.h"
 
 
@@ -101,17 +102,26 @@ void print_spielstand(Spielstand *spielstand)
 	local_spielstand[0] = spielstand->spielstand_spieler1 - SPIEL_SCHLANGEN_LAENGE;
 	local_spielstand[1] = spielstand->spielstand_spieler2 - SPIEL_SCHLANGEN_LAENGE;
 
+	local_spielstand[0] = (local_spielstand[0] < 0) ? 0 : local_spielstand[0];
+	local_spielstand[1] = (local_spielstand[1] < 0) ? 0 : local_spielstand[1];
+
 	int start_x = spielstand->x;
 	int start_y = spielstand->y;
 
 	int digit = 0;
 	int counter = 0;
 
+	char spielstand_char[2][10];
+	int spielstand_laenge = 0;
+
 	for (int i = 0; i < 2; i++)
 	{
-		do
+		sprintf(spielstand_char[i], "%d", local_spielstand[i]);
+		spielstand_laenge = strlen(spielstand_char[i]);
+
+		for (int k = 0; k < spielstand_laenge; k++)
 		{
-			digit = local_spielstand[i] % 10;
+			digit =  (char)spielstand_char[i][k] - '0';
 
 			for (int y = 0; y < PIXEL_SIZE_Y; y++)
 			{
@@ -123,11 +133,8 @@ void print_spielstand(Spielstand *spielstand)
 					}
 				}
 			}
-
-			local_spielstand[i] /= 10;
-
 			counter++;
-		}while (local_spielstand[i] > 0);
+		}
 		counter++;
 	}
 }
