@@ -21,6 +21,7 @@
 #include "pickup.h"
 #include "Spiel.h"
 #include "spielstand.h"
+#include "pixelgruppe.h"
 
 
 int main(void) {
@@ -40,13 +41,16 @@ int main(void) {
 
 	init_pickup(spiel_ptr);
 
+	CharacterList *pixelList = initPixelGroup();
+	printPixelString(pixelList, "SNAKE BY OSZI", 100, 1, SPIELER_1_FARBE);
+
 	refresh();
 	getchar();
 
 	while(spiel_ptr->run == 1)
 	{
 
-		update_Spielstand(spielstand_ptr, spiel_ptr);
+		update_Spielstand(spielstand_ptr, spiel_ptr, pixelList);
 		//Einlesen der Eingabe
 		eingabe_einlesen(eingabe_ptr);
 

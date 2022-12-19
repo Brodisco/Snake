@@ -6,6 +6,7 @@
  */
 
 #include "Spiel.h"
+#include "pixelgruppe.h"
 
 #ifndef SPIELSTAND_H_
 #define SPIELSTAND_H_
@@ -13,11 +14,9 @@
 #define PIXEL_SIZE_X 7
 #define PIXEL_SIZE_Y 5
 
-struct Pixelgruppe
-{
-	char pixel[PIXEL_SIZE_Y][PIXEL_SIZE_X];
-};
-typedef struct Pixelgruppe Pixelgruppe;
+#define TERMINAL_MODE  2
+
+
 
 struct Spielstand
 {
@@ -27,13 +26,12 @@ struct Spielstand
 	int x;
 	int y;
 
-	struct Pixelgruppe *zahlen[10];
+	struct Pixelgruppe *zahlen[12];
 };
 typedef struct Spielstand Spielstand;
-
 Spielstand *inti_PixelGruppe(int x, int y);
-void print_spielstand(Spielstand *spielstand);
-void update_Spielstand(Spielstand *spielstand_ptr, Spiel *spiel_ptr);
+void print_spielstand(Spielstand *spielstand, CharacterList *list, int farbe);
+void update_Spielstand(Spielstand *spielstand_ptr, Spiel *spiel_ptr, CharacterList *list);
 
 
 #endif /* SPIELSTAND_H_ */
