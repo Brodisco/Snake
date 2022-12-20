@@ -84,10 +84,15 @@ void schlange_zeichne(Schlange* schlange_ptr, int farbe)
  * Die Funktion verändert die Schlange in Abhängigkeit des eingesammelten Pickups.
  * Alles ist denkbar. Beschleunigung, Wurmloch oder ähnliches.
  */
-void schlange_bearbeite_pickup(Schlange* schlange_ptr, char pickup)
+void schlange_bearbeite_pickup(Schlange* schlange_ptr, PickUp* pickup_ptr)
 {
 	//Aufgabe 3e) OPTIONAL
-	//TODO
+	if (schlange_ptr->positionen_ptr->kopf_ptr->pos.x == pickup_ptr->pos.x && schlange_ptr->positionen_ptr->kopf_ptr->pos.y == pickup_ptr->pos.y) {
+		pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE+SPIELFELD_OFFSET_X;
+		pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE+SPIELFELD_OFFSET_Y;
+		pickUp_zeichne(pickup_ptr, FARBE_MAGENTA);
+		schlange_ptr->wachsen = 2;
+	}
 }
 
 /*

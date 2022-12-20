@@ -35,6 +35,8 @@ void spiel_init(Spiel* spiel_ptr)
 
 	spiel_ptr->s2_ptr->wachsen = SPIEL_SCHLANGEN_LAENGE;
 
+	spiel_ptr->pickup_ptr = NULL;
+
 	spiel_ptr->run = 1;
 }
 

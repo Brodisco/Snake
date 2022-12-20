@@ -8,6 +8,7 @@
 #include "Console.h"
 #include <ncurses.h>
 #include "Configuration.h"
+#include "Bitmap.h"
 
 //Initialisiert ncurses
 void console_init()
@@ -36,6 +37,36 @@ void console_init()
 }
 
 void console_zeichne_startscreen() {
+	int color = 0;
+	for (int y = 0; y < 50; y++) {
+		for (int x = 0; x < 104; x++) {
+			color = splashScreen[x+104*y];
+			switch (color) {
+				case 1:
+					attron(COLOR_PAIR(SPIELER_1_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+				case 2:
+					attron(COLOR_PAIR(SPIELER_2_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+				case 3:
+					attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+
+				case 4:
+					attron(COLOR_PAIR(SPIELER_1_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+	/*
+
 	printw("    /^\\/^\\\n");
 	printw("  _|__|  O|\n");
 	printw("\\/     /~     \\_/ \\\n");
@@ -56,8 +87,40 @@ void console_zeichne_startscreen() {
 	printw("\n");
 	printw("Spieler 1: W A S D Spieler 2: I J K L\n");
 	printw("\n");
-	printw("Beliebige Taste druecken zum Starten!");
+	printw("Beliebige Taste druecken zum Starten!");*/
 
+	refresh();
+}
+
+void console_zeichne_endscreen() {
+	int color = 0;
+	for (int y = 0; y < 50; y++) {
+		for (int x = 0; x < 104; x++) {
+			color = gameOverScreen[x+104*y];
+			switch (color) {
+				case 1:
+					attron(COLOR_PAIR(SPIELER_1_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+				case 2:
+					attron(COLOR_PAIR(SPIELER_2_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+				case 3:
+					attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+
+				case 4:
+					attron(COLOR_PAIR(SPIELER_1_FARBE));
+					console_zeichne_punkt(x, y, ' ');
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
 	refresh();
 }
 

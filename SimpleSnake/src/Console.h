@@ -20,5 +20,8 @@ void console_cursor_bewegen(int x, int y); //Bewege Cursor auf Position x, y
 
 void console_zeichne_punkt(int x, int y, char c); //Zeichne Zeichen c an Position x, y
 
+void console_zeichne_startscreen();
+void console_zeichne_endscreen();
+
 #endif
 

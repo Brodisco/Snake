@@ -8,6 +8,7 @@
 #ifndef SCHLANGE_H_
 #define SCHLANGE_H_
 #include "Liste.h"
+#include "PickUp.h"
 
 struct Schlange
 {
@@ -30,7 +31,7 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung);
 void schlange_aktualisiere(Schlange* schlange_ptr);
 
 //Funktion zur Bearbeitung eines eingesammelten PickUps
-void schlange_bearbeite_pickup(Schlange* schlange_ptr, char pickup);
+void schlange_bearbeite_pickup(Schlange* schlange_ptr, PickUp* pickup_ptr);
 
 //Zeichnet die Schlange auf der Konsole
 void schlange_zeichne(Schlange* schlange_ptr, int farbe);

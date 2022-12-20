@@ -5,6 +5,9 @@
  *      Author: Mario Wegmann
  */
 
+// Font Noto Color Emoji Groess 11
+// Terminal Groesse 100 x 50
+
 #include <ncurses.h>
 
 //Farben - Übersicht
@@ -15,13 +18,13 @@
 #define FARBE_BLAU              COLOR_BLUE
 #define FARBE_MAGENTA           COLOR_MAGENTA
 #define FARBE_CYAN              COLOR_CYAN
-#define FARBE_WEISS             COLOR_WEISS
+//#define FARBE_WEISS             COLOR_WEISS
 
 //Spielfeld
 #define SPIELFELD_OFFSET_Y		9
 #define SPIELFELD_OFFSET_X		5
-#define SPIELFELD_YSIZE			28
-#define SPIELFELD_XSIZE			108
+#define SPIELFELD_YSIZE			36
+#define SPIELFELD_XSIZE			88
 #define SPIELFELD_RAND_FARBE	FARBE_MAGENTA
 #define SPIELFELD_HINTERGRUND_FARBE	4
 
@@ -57,4 +60,9 @@
 //Spiel
 #define SPIEL_GESCHWINDIGKEIT 	50000
 #define SPIEL_SCHLANGEN_LAENGE 	10
+
+//PickUps
+#define PICKUP_WACHSEN_Type 1
+#define PICKUP_WACHSEN_FARBE FARBE_GELB
+
 

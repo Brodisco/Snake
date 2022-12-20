@@ -8,10 +8,12 @@
 #ifndef SPIEL_H_
 #define SPIEL_H_
 #include "Schlange.h"
+#include "PickUp.h"
 struct Spiel
 {
 	Schlange* s1_ptr;
 	Schlange* s2_ptr;
+	PickUp* pickup_ptr;
 	char run;
 	int schritte;
 };
