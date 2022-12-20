@@ -41,7 +41,7 @@ int main(void) {
 
 	CharacterList *pixelList = initPixelGroup();
 
-	printPixelString(pixelList, "SNAKE BY OSZI", 100, 1, SPIELER_1_FARBE);
+	printPixelString(pixelList, "SNAKE BY OSZ HALLO BENNI", 100, 1, SPIELER_1_FARBE);
 
 	refresh();
 	getchar();
@@ -75,9 +75,9 @@ int main(void) {
 		//Zeichnet die Pickups
 		handle_pickup_conflict(spiel_ptr);
 
+		sparnRandomWormholeElement(spiel_ptr);
 
-
-
+		printWormhole(spiel_ptr, SPIELER_2_FARBE);
 
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;

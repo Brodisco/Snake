@@ -36,6 +36,12 @@ void plaziere_Pickup(Spiel *spiel_ptr);
 void print_Pickup(Spiel *spiel_ptr, int farbe);
 void handle_pickup_conflict(Spiel *spiel_ptr);
 
-
+WormholeList *createWormholeList(void);
+WormholeElement *createWormholeElement();
+void pushWormholeElement(WormholeList *list, WormholeElement *element);
+WormholeElement *checkSnakeWormholeCollision(Schlange *snake_ptr, Wormhole *wormhole_ptr);
+Wormhole *initWormhole();
+void sparnRandomWormholeElement(Spiel *spiel_ptr);
+void printWormhole(Spiel *spiel_ptr, int farbe);
 
 #endif /* SPIEL_H_ */

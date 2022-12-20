@@ -40,11 +40,11 @@ Spiel* spiel_erzeugen()
 {
 	srand(time(NULL));
 
-	Spiel *spiel_ptr = (Spiel*) malloc(sizeof(spiel_ptr));
+	Spiel *spiel_ptr = (Spiel*) malloc(sizeof(Spiel));
 	spiel_init(spiel_ptr);
 
 	spiel_ptr->pickup_ptr = init_pickup();
-	//spiel_ptr->wormhole_ptr = initWormhole();
+	spiel_ptr->wormhole_ptr = initWormhole();
 
 	return spiel_ptr;
 }
