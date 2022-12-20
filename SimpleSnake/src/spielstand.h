@@ -34,4 +34,6 @@ void print_spielstand(Spielstand *spielstand, CharacterList *list, int farbe);
 void update_Spielstand(Spielstand *spielstand_ptr, Spiel *spiel_ptr, CharacterList *list);
 
 
+
+
 #endif /* SPIELSTAND_H_ */
