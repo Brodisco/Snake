@@ -44,7 +44,7 @@ Spiel* spiel_erzeugen()
 	spiel_init(spiel_ptr);
 
 	spiel_ptr->pickup_ptr = init_pickup();
-	spiel_ptr->wormhole_ptr = initWormhole();
+	//spiel_ptr->wormhole_ptr = initWormhole();
 
 	return spiel_ptr;
 }
