@@ -20,7 +20,7 @@
 #include "Configuration.h"
 #include "Spiel.h"
 #include <unistd.h>
-/*
+/*test
 int main (void)
 {
 	//Startet ncurses und initialisiert es

@@ -2,7 +2,7 @@
  * Element.c
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Benjamin Klaric
  */
 #include "Element.h"
 Element* element_erzeugen()
@@ -16,16 +16,17 @@ Element* element_erzeugen()
 /* Prüfe, ob e1 mit einem seiner Nachfolger übereinstimmt */
 char element_folge_pruefen (Element* pruef_ptr, Element* e_ptr)
 {
+
 	char Ergebnis = 0;
-	Element* e_ptrneu = e_ptr;
-	while(!(e_ptr->nachfolger_ptr == NULL))
+
+	while(e_ptr->nachfolger_ptr != NULL)
 	{
-		if((pruef_ptr->pos.x == e_ptrneu->pos.x) && (pruef_ptr->pos.x == e_ptrneu->pos.y))
+		if((pruef_ptr->pos.x == e_ptr->pos.x) && (pruef_ptr->pos.y == e_ptr->pos.y))
 		{
 			Ergebnis = 1;
 			break;
 		}
-		e_ptrneu = e_ptrneu->nachfolger_ptr;
+		e_ptr = e_ptr->nachfolger_ptr;
 	}
 	return Ergebnis;
 }

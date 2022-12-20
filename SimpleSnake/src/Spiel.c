@@ -2,7 +2,7 @@
  * Spiel.c
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Benjamin Klaric
  */
 #include "Configuration.h"
 #include "Console.h"
@@ -57,8 +57,42 @@ void spiel_zeichne_rand()
 
 void spiel_pruefe_kollission(Spiel* spiel_ptr)
 {
-	//Aufgabe 4d)
-	//TODO
+	char folge_1 = element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr);
+	char folge_2 = element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr);
+	char folge_3 = element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
+	char folge_4 = element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
+
+		if(folge_1 == 1)
+		{
+			spiel_ptr->run = 0;
+		}
+
+		if(folge_2 == 1)
+		{
+			spiel_ptr->run = 0;
+		}
+
+		if(folge_3 == 1)
+		{
+			spiel_ptr->run = 0;
+		}
+
+		if(folge_4 == 1)
+		{
+			spiel_ptr->run = 0;
+		}
+
+		if((spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_OFFSET_X + 1) || (spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_OFFSET_Y + 1)
+				|| (spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_XSIZE - 1) || (spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_YSIZE - 1))
+		{
+			spiel_ptr->run = 0;
+		}
+
+		if((spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_OFFSET_X + 1) || (spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_OFFSET_Y + 1)
+				|| (spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_XSIZE - 1) || (spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_YSIZE - 1))
+		{
+			spiel_ptr->run = 0;
+		}
 }
 
 void spiel_zeichne_spielstand()
