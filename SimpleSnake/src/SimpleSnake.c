@@ -20,7 +20,7 @@
 #include "Configuration.h"
 #include "Spiel.h"
 #include <unistd.h>
-/*test
+/*test von Bodisco
 int main (void)
 {
 	//Startet ncurses und initialisiert es
@@ -73,6 +73,7 @@ int main(void) {
 		schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
 
+	//	schlange_bearbeite_pickup();
 		//Prüfe auf Kollission => Relevant für Spielende
 		spiel_pruefe_kollission(spiel_ptr);
 

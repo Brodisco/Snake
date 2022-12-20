@@ -2,12 +2,14 @@
  * Schlange.c
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Benjamin Klaric
  */
 #include <stdlib.h>
+#include <time.h>
 #include "Configuration.h"
 #include "Schlange.h"
 #include "Console.h"
+#include <ncurses.h>
 
 /*
  * Initialisiert alle Attribute
@@ -35,6 +37,7 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 {
 	int x, y;
 
+	//Element* element_ptr = element_erzeugen();
 	Element* element_ptr = (Element*) malloc(sizeof(Element));
 	Element* ende_ptr;
 
@@ -93,17 +96,37 @@ void schlange_zeichne(Schlange* schlange_ptr, int farbe)
 		element_ptr = element_ptr->nachfolger_ptr;
 	}
 }
-
 /*
  * Die Funktion verändert die Schlange in Abhängigkeit des eingesammelten Pickups.
  * Alles ist denkbar. Beschleunigung, Wurmloch oder ähnliches.
  */
 void schlange_bearbeite_pickup(Schlange* schlange_ptr, char pickup)
 {
-	//Aufgabe 3e) OPTIONAL
-	//TODO
-}
+	attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
+	Element* element = element_erzeugen();
+	srand(time(NULL));
+	int min_x = SPIELFELD_OFFSET_X;
+	int max_x = SPIELFELD_XSIZE;
+	int min_y = SPIELFELD_OFFSET_Y;
+	int max_y = SPIELFELD_YSIZE;
+	int zaehler = 0;
 
+	while(zaehler < 10)
+	{
+		element->pos.x = (rand()%(max_x - min_x + 1) + min_x);
+		element->pos.y = (rand()%(max_y - min_y + 1) + min_y);
+
+		console_zeichne_punkt(element->pos.x, element->pos.y, ' ');
+
+		char snickers = element_folge_pruefen(schlange_ptr->positionen_ptr->kopf_ptr, element);
+
+		if(snickers == 1)
+		{
+			schlange_ptr->wachsen++;
+		}
+		zaehler++;
+	}
+}
 /*
  * Die Funktion sollte nach jeder Bewegung aufgerufen werden und zum Beispiel den
  * Punktestand in Abhängigkeit der Länge der Schlange oder der Spieldauer erhöhen.
