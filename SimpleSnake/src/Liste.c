@@ -11,6 +11,13 @@
 Liste* liste_erzeugen()
 {
 	Liste *list = (Liste*) malloc(sizeof(Liste));
+
+	if (list == NULL)
+	{
+		fprintf(stderr, "Liste konnte nicht erzeugt werden \n");
+		return NULL;
+	}
+
 	list->kopf_ptr = NULL;
 	list->ende_ptr = NULL;
 	list->laenge = 0;
@@ -49,6 +56,7 @@ void liste_entferne_element_at_adress(Liste *liste_ptr, Element *element_ptr)
 		if(local_element == element_ptr)
 		{
 			if (liste_ptr->laenge == 1)
+
 			{
 				liste_ptr->kopf_ptr = NULL;
 				liste_ptr->ende_ptr = NULL;

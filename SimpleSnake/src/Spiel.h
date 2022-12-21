@@ -12,12 +12,15 @@
 #include "pickup.h"
 #include "wormhole.h"
 
+
 struct Spiel
 {
 	Schlange* s1_ptr;
 	Schlange* s2_ptr;
 	Pickup *pickup_ptr;
 	Wormhole *wormhole_ptr;
+
+	Schlange* winner;
 
 	char run;
 	int schritte;
@@ -30,6 +33,7 @@ void spiel_zeichne_rand();
 void spiel_zeichne_spielstand();
 void spiel_pruefe_kollission(Spiel* spiel_ptr);
 void setNewSnakeHeadPosition(Schlange *schlange_ptr, int x, int y);
+void resetGame(Spiel *spiel_ptr);
 
 Pickup *init_pickup();
 void plaziere_Pickup(Spiel *spiel_ptr);
@@ -44,5 +48,6 @@ Wormhole *initWormhole();
 void sparnRandomWormholeElement(Spiel *spiel_ptr);
 void printWormhole(Spiel *spiel_ptr, int farbe);
 void handleWormholeCollision(Spiel *spiel_ptr);
+
 
 #endif /* SPIEL_H_ */

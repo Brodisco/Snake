@@ -13,6 +13,13 @@
 Element* element_erzeugen()
 {
 	Element *element = (Element*) malloc(sizeof(Element));
+
+	if (element == NULL)
+	{
+		fprintf(stderr, "Element konnte nicht erzeugt werden!");
+		return NULL;
+	}
+
 	element->pos.x = 0;
 	element->pos.y = 0;
 	element->nachfolger_ptr = NULL;

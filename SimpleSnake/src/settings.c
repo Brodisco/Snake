@@ -87,40 +87,91 @@ int valueChooser(CharacterList *list, int farbe, int pos,  int defaultValue)
 	return defaultValue;
 }
 
+void displayWinningScreen(Spiel *spiel_ptr, CharacterList *list, int farbe)
+{
+	char str[4][128];
+	int winner = 0;
+	static int start = 1;
+
+	if(spiel_ptr->winner == spiel_ptr->s1_ptr)
+	{
+		winner = 1;
+	}
+	else if (spiel_ptr->winner == spiel_ptr->s2_ptr)
+	{
+		winner = 2;
+	}
+	else
+	{
+		winner = 0;
+	}
+
+	sprintf(str[0], " ");
+	sprintf(str[1], "GEWINNER IST");
+	sprintf(str[2], "SPIELER %d", winner);
+	sprintf(str[3], "NICHT ERMITTELBAR %d", winner);
+
+	if (winner == 0 && start == 0)
+	{
+		printPixelString(list, str[1],100, 30, 1);
+		printPixelString(list, str[3],100, 38, 1);
+	}
+	else if (winner == 0 && start == 1)
+	{
+
+	} else {
+		printPixelString(list, str[1],100, 30, 1);
+		printPixelString(list, str[2],100, 38, 1);
+	}
+
+	start = 0;
+}
+
 void displaySettingsScreen(Spiel *spiel_ptr, CharacterList *list)
 {
-	clearScreen(SPIELFELD_HINTERGRUND_FARBE);
-	printSettingMenue(list, 1);
-
-	printPixelString(list, "SNAKE BY OSZI", 50, 1, SPIELER_1_FARBE);
-
 	char input = 0;
 	static int pos = 10;
 
+	clearScreen(SPIELFELD_HINTERGRUND_FARBE);
+	printSettingMenue(list, 1);
+	printPixelString(list, "SNAKE BY OSZIMILIAN", 50, 1, SPIELER_1_FARBE);
 	printPixelString(list, "#", 2, pos, 1);
 
-	nodelay(stdscr, FALSE);
+	displayWinningScreen(spiel_ptr, list, 1);
 
+	nodelay(stdscr, FALSE);
 
 
 	do
 	{
 		input = getch();
-		//mvprintw(5,5,"Taste: %c \n", input);
 
 		if (input == 'w') pos = settingsChooser(list, 1, 0);
 		else if (input == 's') pos = settingsChooser(list, 1, 1);
 
-		if (pos == 10 && input == 'm') valueChooser(list, 1, pos, 10);
-		if (pos == 18 && input == 'm') spiel_ptr->wormhole_ptr->maxWormhole = valueChooser(list, 1, pos, 1);
-		if (pos == 26 && input == 'm') input = 'q';
-		if (pos == 34 && input == 'm') exit(-1);
+		if (pos == 10 && input == 'm')
+		{
+			spiel_ptr->pickup_ptr->maxPickup = valueChooser(list, 1, pos, 10);
+		}
+		if (pos == 18 && input == 'm')
+		{
+			spiel_ptr->wormhole_ptr->maxWormhole = valueChooser(list, 1, pos, 1);
+		}
+		if (pos == 26 && input == 'm')
+		{
+			input = 'q';
+		}
+		if (pos == 34 && input == 'm')
+		{
+			exit(-1);
+		}
 
 	}while(input != 'q');
 
+
 	nodelay(stdscr, TRUE );
 
-	clearScreen(SPIELFELD_HINTERGRUND_FARBE);
 
+	clearScreen(SPIELFELD_HINTERGRUND_FARBE);
 
 }

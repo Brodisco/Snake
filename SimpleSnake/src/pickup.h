@@ -17,6 +17,8 @@ struct Pickup
 
 	clock_t last_time;
 	long time_intervall;
+	int maxPickup;
+	int pickupAmount;
 
 };
 typedef struct Pickup Pickup;
