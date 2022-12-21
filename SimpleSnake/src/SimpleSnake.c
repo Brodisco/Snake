@@ -25,67 +25,87 @@
 #include "spielstand.h"
 #include "pixelgruppe.h"
 
+#include "settings.h"
+
 #include "Spiel.h"
 
 int main(void) {
 
 	console_init();
 
-	spiel_zeichne_rand();
+	Spielstand *spielstand_ptr = inti_PixelGruppe(5, 1);
+
+	CharacterList *pixelList = initPixelGroup();
 
 	Eingabe* eingabe_ptr = eingabe_erzeugen();
 
 	Spiel* spiel_ptr = spiel_erzeugen();
 
-	Spielstand *spielstand_ptr = inti_PixelGruppe(5, 1);
 
-	CharacterList *pixelList = initPixelGroup();
 
-	printPixelString(pixelList, "SNAKE BY OSZ HALLO BENNI", 100, 1, SPIELER_1_FARBE);
+	displaySettingsScreen(spiel_ptr, pixelList);
+
+
+	printPixelString(pixelList, "SNAKE BY OSZI", 50, 1, SPIELER_1_FARBE);
+
+	spiel_zeichne_rand();
 
 	refresh();
 	getchar();
 
-	while(spiel_ptr->run == 1)
+	while(1)
 	{
-		//Zeichnet den Spielstand
-		update_Spielstand(spielstand_ptr, spiel_ptr, pixelList);
-		//Einlesen der Eingabe
-		eingabe_einlesen(eingabe_ptr);
-
-		//Zeichne Schlange 1
-		schlange_zeichne(spiel_ptr->s1_ptr, SPIELFELD_HINTERGRUND_FARBE);
-		schlange_bewege(spiel_ptr->s1_ptr, eingabe_ptr->letzte_eingabe_spieler_1);
-		schlange_zeichne(spiel_ptr->s1_ptr, SPIELER_1_FARBE);
-
-		//Zeichne Schlange 2
-		schlange_zeichne(spiel_ptr->s2_ptr, SPIELFELD_HINTERGRUND_FARBE);
-		schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
-		schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
-
-		print_Pickup(spiel_ptr, SPIELFELD_HINTERGRUND_FARBE);
-		plaziere_Pickup(spiel_ptr);
-		print_Pickup(spiel_ptr, SPIELER_1_FARBE);
 
 
+		while(spiel_ptr->run == 1)
+		{
+			//Zeichnet den Spielstand
+			update_Spielstand(spielstand_ptr, spiel_ptr, pixelList);
+			//Einlesen der Eingabe
+			eingabe_einlesen(eingabe_ptr);
 
-		//Prüfe auf Kollission => Relevant für Spielende
-		spiel_pruefe_kollission(spiel_ptr);
+			//Zeichne Schlange 1
+			schlange_zeichne(spiel_ptr->s1_ptr, SPIELFELD_HINTERGRUND_FARBE);
+			schlange_bewege(spiel_ptr->s1_ptr, eingabe_ptr->letzte_eingabe_spieler_1);
+			schlange_zeichne(spiel_ptr->s1_ptr, SPIELER_1_FARBE);
 
-		//Zeichnet die Pickups
-		handle_pickup_conflict(spiel_ptr);
+			//Zeichne Schlange 2
+			schlange_zeichne(spiel_ptr->s2_ptr, SPIELFELD_HINTERGRUND_FARBE);
+			schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
+			schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
 
-		printWormhole(spiel_ptr, SPIELFELD_HINTERGRUND_FARBE);
-		sparnRandomWormholeElement(spiel_ptr);
-		handleWormholeCollision(spiel_ptr);
-		printWormhole(spiel_ptr, SPIELER_2_FARBE);
+			print_Pickup(spiel_ptr, SPIELFELD_HINTERGRUND_FARBE);
+			plaziere_Pickup(spiel_ptr);
+			print_Pickup(spiel_ptr, SPIELER_1_FARBE);
 
-		//Spielzeit erhöhen
-		spiel_ptr->schritte++;
 
-		refresh();
-		//Pausieren des Main-Thread - Spielgeschwindigkeit
-		usleep(SPIEL_GESCHWINDIGKEIT);
+
+			//Prüfe auf Kollission => Relevant für Spielende
+			spiel_pruefe_kollission(spiel_ptr);
+
+			//Zeichnet die Pickups
+			handle_pickup_conflict(spiel_ptr);
+
+			printWormhole(spiel_ptr, SPIELFELD_HINTERGRUND_FARBE);
+			sparnRandomWormholeElement(spiel_ptr);
+			handleWormholeCollision(spiel_ptr);
+			printWormhole(spiel_ptr, SPIELER_2_FARBE);
+
+			//Spielzeit erhöhen
+			spiel_ptr->schritte++;
+
+			refresh();
+			//Pausieren des Main-Thread - Spielgeschwindigkeit
+			usleep(SPIEL_GESCHWINDIGKEIT);
+		}
+
+		displaySettingsScreen(spiel_ptr, pixelList);
+
+		printPixelString(pixelList, "SNAKE BY OSZI", 50, 1, SPIELER_1_FARBE);
+
+		spiel_zeichne_rand();
+
+		spiel_ptr->run = 1;
 	}
 
 	//Warte auf Tastendruck
