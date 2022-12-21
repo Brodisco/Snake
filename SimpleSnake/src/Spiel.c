@@ -157,8 +157,7 @@ void resetGame(Spiel *spiel_ptr)
 	spiel_ptr->s1_ptr->positionen_ptr->laenge = SPIEL_SCHLANGEN_LAENGE;
 	spiel_ptr->s2_ptr->positionen_ptr->laenge = SPIEL_SCHLANGEN_LAENGE;
 
-	//spielstand_ptr->spielstand_spieler1 = 0;
-	//spielstand_ptr->spielstand_spieler2 = 0;
+
 
 }
 

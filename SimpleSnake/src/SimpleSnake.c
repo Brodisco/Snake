@@ -53,6 +53,8 @@ int main(void) {
 	refresh();
 	getchar();
 
+
+
 	while(1)
 	{
 		//spiel_ptr->winner = NULL;
@@ -110,7 +112,10 @@ int main(void) {
 
 		eingabe_init(eingabe_ptr);
 
-		//resetGame(spiel_ptr, spielstand_ptr);
+		resetGame(spiel_ptr);
+
+		spielstand_ptr->spielstand_spieler1 = 0;
+		spielstand_ptr->spielstand_spieler2 = 0;
 
 		spiel_init(spiel_ptr);
 	}

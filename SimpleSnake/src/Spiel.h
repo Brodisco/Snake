@@ -11,7 +11,7 @@
 #include "Schlange.h"
 #include "pickup.h"
 #include "wormhole.h"
-#include "spielstand.h"
+
 
 struct Spiel
 {
