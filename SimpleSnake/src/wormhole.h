@@ -39,6 +39,8 @@ struct Wormhole
 
 	clock_t last_time;
 	long time_intervall;
+	int wormholeAmount;
+	int maxWormhole;
 };
 typedef struct Wormhole Wormhole;
 

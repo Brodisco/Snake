@@ -75,8 +75,9 @@ int main(void) {
 		//Zeichnet die Pickups
 		handle_pickup_conflict(spiel_ptr);
 
+		printWormhole(spiel_ptr, SPIELFELD_HINTERGRUND_FARBE);
 		sparnRandomWormholeElement(spiel_ptr);
-
+		handleWormholeCollision(spiel_ptr);
 		printWormhole(spiel_ptr, SPIELER_2_FARBE);
 
 		//Spielzeit erhöhen
