@@ -53,7 +53,6 @@ void print_spielstand(Spielstand *spielstand, CharacterList *list, int farbe)
 void update_Spielstand(Spielstand *spielstand_ptr, Spiel *spiel_ptr, CharacterList *list)
 {
 	attron(COLOR_PAIR(SPIELFELD_HINTERGRUND_FARBE));
-	//print_spielstand(spielstand_ptr, list, SPIELER_1_FARBE);
 
 	int laenge_spieler1 = spiel_ptr->s1_ptr->positionen_ptr->laenge;
 	int laenge_spieler2 = spiel_ptr->s2_ptr->positionen_ptr->laenge;

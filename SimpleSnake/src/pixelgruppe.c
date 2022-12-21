@@ -217,6 +217,8 @@ CharacterList *initPixelGroup()
 
 	pushCharacterElement(list, createCharacter(' ', "000000000000000000000000000000", 6, 5));
 
+	pushCharacterElement(list, createCharacter('#', "111111111111111111111111111111", 6, 5));
+
 
 	pushCharacterElement(list, createCharacter(':', "000000001100000000001100000000", 6, 5));
 

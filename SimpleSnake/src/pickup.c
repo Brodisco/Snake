@@ -5,28 +5,27 @@
  *      Author: student
  */
 
-#include "Configuration.h"
-#include "Console.h"
-#include "Spiel.h"
 #include <time.h>
 #include <stdlib.h>
 #include <ncurses.h>
 
-void init_pickup(Spiel *spiel_ptr)
+#include "Configuration.h"
+#include "Console.h"
+
+#include "pickup.h"
+#include "Spiel.h"
+
+Pickup *init_pickup()
 {
 	Pickup *pickup_ptr = (Pickup*) malloc(sizeof(Pickup));
-	spiel_ptr->pickup_ptr = pickup_ptr;
 
-	srand(time(NULL));
+	pickup_ptr->pickup_list = liste_erzeugen();
 
-	spiel_ptr->pickup_ptr->pickup_list = liste_erzeugen();
+	pickup_ptr->last_time = clock();
 
-	//plaziere_Pickup(spiel_ptr);
+	pickup_ptr->time_intervall = 10000;
 
-
-	spiel_ptr->pickup_ptr->last_time = clock();
-
-	spiel_ptr->pickup_ptr->time_intervall = 10000;
+	return pickup_ptr;
 }
 
 
@@ -54,9 +53,9 @@ void plaziere_Pickup(Spiel *spiel_ptr)
 	}
 }
 
-void print_Pickup(Pickup *pickup_ptr, int farbe)
+void print_Pickup(Spiel *spiel_ptr, int farbe)
 {
-	Element *element_ptr = pickup_ptr->pickup_list->kopf_ptr;
+	Element *element_ptr = spiel_ptr->pickup_ptr->pickup_list->kopf_ptr;
 
 	attron(COLOR_PAIR(farbe));
 

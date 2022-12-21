@@ -4,12 +4,18 @@
  *  Created on: 12.12.2022
  *      Author: student
  */
-#include "Configuration.h"
-#include "Console.h"
-#include "Spiel.h"
 #include <time.h>
 #include <stdlib.h>
 #include <ncurses.h>
+
+#include "Configuration.h"
+#include "Console.h"
+
+#include "pickup.h"
+#include "wormhole.h"
+
+#include "Spiel.h"
+
 
 void spiel_init(Spiel* spiel_ptr)
 {
@@ -32,8 +38,14 @@ void spiel_init(Spiel* spiel_ptr)
 
 Spiel* spiel_erzeugen()
 {
-	Spiel *spiel_ptr = (Spiel*) malloc(sizeof(spiel_ptr));
+	srand(time(NULL));
+
+	Spiel *spiel_ptr = (Spiel*) malloc(sizeof(Spiel));
 	spiel_init(spiel_ptr);
+
+	spiel_ptr->pickup_ptr = init_pickup();
+	spiel_ptr->wormhole_ptr = initWormhole();
+
 	return spiel_ptr;
 }
 

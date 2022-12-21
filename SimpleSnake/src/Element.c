@@ -4,6 +4,11 @@
  *  Created on: 12.12.2022
  *      Author: student
  */
+#include <stdio.h>
+#include <stdlib.h>
+
+// p spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr
+
 #include "Element.h"
 Element* element_erzeugen()
 {

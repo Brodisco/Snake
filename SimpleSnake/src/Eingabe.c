@@ -20,39 +20,47 @@ void eingabe_init(struct Eingabe* eingabe_ptr)
 {
 	eingabe_ptr->letzte_eingabe_spieler_1 = BEWEGUNG_RECHTS;
 	eingabe_ptr->letzte_eingabe_spieler_2 = BEWEGUNG_LINKS;
+
+	eingabe_ptr->flushEnable = 1;
 }
 
 void eingabe_einlesen(struct Eingabe* eingabe_ptr)
 {
 	char c = 'X';
+
+	char *spieler1 = &eingabe_ptr->letzte_eingabe_spieler_1;
+	char *spieler2 = &eingabe_ptr->letzte_eingabe_spieler_2;
+
 	for (int i = 0; i < 100; i++)
 	{
 		c = getch();
+		eingabe_ptr->input = c;
+
 		switch (c)
 		{
 			case SPIELER_1_HOCH:
-				eingabe_ptr->letzte_eingabe_spieler_1 = BEWEGUNG_HOCH;
+				*spieler1 = (*spieler1 == BEWEGUNG_RUNTER) ? *spieler1 : BEWEGUNG_HOCH;
 				break;
 			case SPIELER_2_HOCH:
-				eingabe_ptr->letzte_eingabe_spieler_2 = BEWEGUNG_HOCH;
+				*spieler2 = (*spieler2 == BEWEGUNG_RUNTER) ? *spieler2 : BEWEGUNG_HOCH;
 				break;
 			case SPIELER_1_RUNTER:
-				eingabe_ptr->letzte_eingabe_spieler_1 = BEWEGUNG_RUNTER;
+				*spieler1 = (*spieler1 == BEWEGUNG_HOCH) ? *spieler1 : BEWEGUNG_RUNTER;
 				break;
 			case SPIELER_2_RUNTER:
-				eingabe_ptr->letzte_eingabe_spieler_2 = BEWEGUNG_RUNTER;
+				*spieler2 = (*spieler2 == BEWEGUNG_HOCH) ? *spieler2 : BEWEGUNG_RUNTER;
 				break;
 			case SPIELER_1_LINKS:
-				eingabe_ptr->letzte_eingabe_spieler_1 = BEWEGUNG_LINKS;
+				*spieler1 = (*spieler1 == BEWEGUNG_RECHTS) ? *spieler1 : BEWEGUNG_LINKS;
 				break;
 			case SPIELER_2_LINKS:
-				eingabe_ptr->letzte_eingabe_spieler_2 = BEWEGUNG_LINKS;
+				*spieler2 = (*spieler2 == BEWEGUNG_RECHTS) ? *spieler2 : BEWEGUNG_LINKS;
 				break;
 			case SPIELER_1_RECHTS:
-				eingabe_ptr->letzte_eingabe_spieler_1 = BEWEGUNG_RECHTS;
+				*spieler1 = (*spieler1 == BEWEGUNG_LINKS) ? *spieler1 : BEWEGUNG_RECHTS;
 				break;
 			case SPIELER_2_RECHTS:
-				eingabe_ptr->letzte_eingabe_spieler_2 = BEWEGUNG_RECHTS;
+				*spieler2 = (*spieler2 == BEWEGUNG_LINKS) ? *spieler2 : BEWEGUNG_RECHTS;
 				break;
 			default:
 				break;
@@ -60,8 +68,14 @@ void eingabe_einlesen(struct Eingabe* eingabe_ptr)
 				//UNGÜLTIG / UNBEKANNT
 		}
 
-		flushinp(); 	// Leert den Puffer
+		if (eingabe_ptr->flushEnable)
+		{
+			flushinp(); 	// Leert den Puffer
+		}
+
 		usleep(100); 	// Hält den Thread für 100 us an.
 	}
+
+
 }
 

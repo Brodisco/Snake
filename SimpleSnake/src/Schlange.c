@@ -8,6 +8,8 @@
 #include "Configuration.h"
 #include "Schlange.h"
 #include "Console.h"
+#include "Liste.h"
+#include "Spiel.h"
 
 /*
  * Initialisiert alle Attribute
@@ -63,11 +65,19 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 	}
 }
 
+void setNewSnakeHeadPosition(Schlange *schlange_ptr, int x, int y)
+{
+	//liste_einfuegen_kopf(schlange_ptr->positionen_ptr, liste_entferne_ende(schlange_ptr->positionen_ptr));
+	//schlange_ptr->positionen_ptr->laenge--;
+
+	schlange_ptr->positionen_ptr->kopf_ptr->pos.x = x;
+	schlange_ptr->positionen_ptr->kopf_ptr->pos.y  = y;
+}
 
 /*
  * Zeichnet die Schlange auf der Konsole
  */
-void schlange_zeichne(Schlange* schlange_ptr, int farbe)
+void schlange_zeichne(Schlange *schlange_ptr, int farbe)
 {
 	Element *element_ptr = schlange_ptr->positionen_ptr->kopf_ptr;
 	attron(COLOR_PAIR(farbe));
@@ -77,6 +87,7 @@ void schlange_zeichne(Schlange* schlange_ptr, int farbe)
 		element_ptr = element_ptr->nachfolger_ptr;
 	}
 }
+
 
 /*
  * Die Funktion verändert die Schlange in Abhängigkeit des eingesammelten Pickups.

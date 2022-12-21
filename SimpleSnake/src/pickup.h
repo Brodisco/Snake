@@ -8,18 +8,12 @@
 #ifndef PICKUP_H_
 #define PICKUP_H_
 
-#include "Configuration.h"
-#include "Console.h"
-//#include "Spiel.h"
-#include <time.h>
-#include <stdlib.h>
-#include <ncurses.h>
+
+#include "Liste.h"
 
 struct Pickup
 {
 	Liste *pickup_list;
-	Liste *wurmhole_list_start;
-	Liste *wurmhole_list_ende;
 
 	clock_t last_time;
 	long time_intervall;
