@@ -110,7 +110,7 @@ int main(void) {
 
 		eingabe_init(eingabe_ptr);
 
-		resetGame(spiel_ptr);
+		//resetGame(spiel_ptr, spielstand_ptr);
 
 		spiel_init(spiel_ptr);
 	}

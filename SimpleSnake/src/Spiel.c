@@ -13,9 +13,7 @@
 
 #include "pickup.h"
 #include "wormhole.h"
-
 #include "Spiel.h"
-
 
 void spiel_init(Spiel* spiel_ptr)
 {
@@ -152,6 +150,16 @@ void resetGame(Spiel *spiel_ptr)
 	spiel_ptr->wormhole_ptr->maxWormhole = maxWormhole;
 
 	spiel_ptr->winner = NULL;
+
+	spiel_ptr->s1_ptr->punkte = 0;
+	spiel_ptr->s2_ptr->punkte = 0;
+
+	spiel_ptr->s1_ptr->positionen_ptr->laenge = SPIEL_SCHLANGEN_LAENGE;
+	spiel_ptr->s2_ptr->positionen_ptr->laenge = SPIEL_SCHLANGEN_LAENGE;
+
+	//spielstand_ptr->spielstand_spieler1 = 0;
+	//spielstand_ptr->spielstand_spieler2 = 0;
+
 }
 
 
