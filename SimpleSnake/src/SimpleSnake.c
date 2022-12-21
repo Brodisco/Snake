@@ -73,7 +73,8 @@ int main(void) {
 		schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
 
-	//	schlange_bearbeite_pickup();
+	//	schlange_bearbeite_pickup(spiel_ptr->s1_ptr);
+	//	schlange_bearbeite_pickup(spiel_ptr->s2_ptr);
 		//Prüfe auf Kollission => Relevant für Spielende
 		spiel_pruefe_kollission(spiel_ptr);
 

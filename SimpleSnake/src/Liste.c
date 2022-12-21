@@ -2,7 +2,7 @@
  * Liste.c
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Benjamin Klaric
  */
 
 #include "Liste.h"

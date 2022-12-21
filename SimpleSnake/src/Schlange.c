@@ -109,22 +109,17 @@ void schlange_bearbeite_pickup(Schlange* schlange_ptr, char pickup)
 	int max_x = SPIELFELD_XSIZE;
 	int min_y = SPIELFELD_OFFSET_Y;
 	int max_y = SPIELFELD_YSIZE;
-	int zaehler = 0;
 
-	while(zaehler < 10)
+	element->pos.x = (rand()%(max_x - min_x + 1) + min_x);
+	element->pos.y = (rand()%(max_y - min_y + 1) + min_y);
+
+	console_zeichne_punkt(element->pos.x, element->pos.y, ' ');
+
+	char snickers = element_folge_pruefen(schlange_ptr->positionen_ptr->kopf_ptr, element);
+
+	if(snickers == 1)
 	{
-		element->pos.x = (rand()%(max_x - min_x + 1) + min_x);
-		element->pos.y = (rand()%(max_y - min_y + 1) + min_y);
-
-		console_zeichne_punkt(element->pos.x, element->pos.y, ' ');
-
-		char snickers = element_folge_pruefen(schlange_ptr->positionen_ptr->kopf_ptr, element);
-
-		if(snickers == 1)
-		{
-			schlange_ptr->wachsen++;
-		}
-		zaehler++;
+		schlange_ptr->wachsen++;
 	}
 }
 /*
