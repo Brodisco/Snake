@@ -34,16 +34,16 @@ int main(void) {
 
 		srand(time(0));
 
-		//Zeichne den Spielfeldrand
+		// Zeichne den Spielfeldrand
 		spiel_zeichne_rand();
-
-		//Erzeugt eine Struktur zum Einlesen
+		// Zeichne Anfangs Punktestand
+		spiel_zeichne_spielstand(NULL);
+		// Erzeugt eine Struktur zum Einlesen
 		Eingabe* eingabe_ptr = eingabe_erzeugen();
 
 
 		//Erzeugt ein Spiel mit zwei Schlangen und initialisiert es
 		Spiel* spiel_ptr = spiel_erzeugen();
-
 		refresh();
 		while(spiel_ptr->run == 1)
 		{
@@ -60,21 +60,31 @@ int main(void) {
 			schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
 			schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
 
-			//Prüfe auf Kollission => Relevant für Spielende
-			spiel_pruefe_kollission(spiel_ptr);
-
 			//PickUps
 
-			if(spiel_ptr->pickup_ptr == NULL) {
+			//if(spiel_ptr->pickup_ptr == NULL) {
 				// Aktuell kein PickUp
 				spiel_ptr->pickup_ptr = pickUp_erzeugen();
-				spiel_ptr->pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE+SPIELFELD_OFFSET_X;
-				spiel_ptr->pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE+SPIELFELD_OFFSET_Y;
-				pickUp_zeichne(spiel_ptr->pickup_ptr, FARBE_MAGENTA);
-			}
+				Element* testElement_ptr = element_erzeugen();
+
+				do {
+				// Innerhalb des Spielfeds mit 1 Punkt abstand
+				testElement_ptr->pos.x = rand()%(SPIELFELD_XSIZE-2)+SPIELFELD_OFFSET_X+2;
+				testElement_ptr->pos.y = rand()%(SPIELFELD_YSIZE-2)+SPIELFELD_OFFSET_Y+2;
+				} while (element_folge_pruefen(testElement_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr) == 1 || element_folge_pruefen(testElement_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr) == 1);
+				spiel_ptr->pickup_ptr->pos.x = testElement_ptr->pos.x;
+				spiel_ptr->pickup_ptr->pos.y = testElement_ptr->pos.y;
+				free(testElement_ptr);
+				pickUp_zeichne(spiel_ptr->pickup_ptr, SPIELER_2_FARBE/*FARBE_MAGENTA*/);
+			//}
 
 			schlange_bearbeite_pickup(spiel_ptr->s1_ptr, spiel_ptr->pickup_ptr);
 			schlange_bearbeite_pickup(spiel_ptr->s2_ptr, spiel_ptr->pickup_ptr);
+
+			spiel_zeichne_spielstand(spiel_ptr);
+
+			//Prüfe auf Kollission => Relevant für Spielende
+						spiel_pruefe_kollission(spiel_ptr);
 
 			//Spielzeit erhöhen
 			spiel_ptr->schritte++;
@@ -85,7 +95,11 @@ int main(void) {
 		}
 
 		console_leeren();
-		console_zeichne_endscreen();
+
+		console_zeichne_endscreen(spiel_ptr);
+		spiel_zeichne_spielstand(spiel_ptr);
+
+		refresh();
 
 		// Aufräumen
 		//TODO Liste freigeben
@@ -98,7 +112,11 @@ int main(void) {
 		free(spiel_ptr);
 
 		// Warte auf Tastendruck
-		quitCharacter = getchar();
+		quitCharacter = 'a';
+		while (quitCharacter != 'q' && quitCharacter != 'r') {
+			quitCharacter = getchar();
+		}
+
 	}
 
 	endwin();

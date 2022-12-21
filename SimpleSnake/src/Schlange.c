@@ -88,10 +88,11 @@ void schlange_bearbeite_pickup(Schlange* schlange_ptr, PickUp* pickup_ptr)
 {
 	//Aufgabe 3e) OPTIONAL
 	if (schlange_ptr->positionen_ptr->kopf_ptr->pos.x == pickup_ptr->pos.x && schlange_ptr->positionen_ptr->kopf_ptr->pos.y == pickup_ptr->pos.y) {
-		pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE+SPIELFELD_OFFSET_X;
-		pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE+SPIELFELD_OFFSET_Y;
+		pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE-2+SPIELFELD_OFFSET_X+1;
+		pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE-2+SPIELFELD_OFFSET_Y+1;
 		pickUp_zeichne(pickup_ptr, FARBE_MAGENTA);
 		schlange_ptr->wachsen = 2;
+		schlange_ptr->punkte += 3;
 	}
 }
 

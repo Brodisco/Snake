@@ -10,6 +10,7 @@
 #include "Configuration.h"
 #include "Bitmap.h"
 
+
 //Initialisiert ncurses
 void console_init()
 {
@@ -92,38 +93,31 @@ void console_zeichne_startscreen() {
 	refresh();
 }
 
-void console_zeichne_endscreen() {
+void console_zeichne_endscreen(Spiel* spiel_ptr) {
+	int zeichnen = 0;
 	int color = 0;
+	if (spiel_ptr->s1_ptr->punkte > spiel_ptr->s2_ptr->punkte) {
+		// Spieler 2 hat verloren
+		color = SPIELER_2_FARBE;
+	} else if (spiel_ptr->s1_ptr->punkte < spiel_ptr->s2_ptr->punkte) {
+		// Spieler 1 hat verloren
+		color = SPIELER_1_FARBE;
+	} else {
+		// Unentschieden
+		color = SPIELFELD_RAND_FARBE;
+	}
+
 	for (int y = 0; y < 50; y++) {
 		for (int x = 0; x < 104; x++) {
-			color = gameOverScreen[x+104*y];
-			switch (color) {
-				case 1:
-					attron(COLOR_PAIR(SPIELER_1_FARBE));
-					console_zeichne_punkt(x, y, ' ');
-					break;
-				case 2:
-					attron(COLOR_PAIR(SPIELER_2_FARBE));
-					console_zeichne_punkt(x, y, ' ');
-					break;
-				case 3:
-					attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
-					console_zeichne_punkt(x, y, ' ');
-					break;
-
-				case 4:
-					attron(COLOR_PAIR(SPIELER_1_FARBE));
-					console_zeichne_punkt(x, y, ' ');
-					break;
-
-				default:
-					break;
+			zeichnen = gameOverScreen[x+104*y];
+			if (zeichnen == 2) {
+				attron(COLOR_PAIR(color));
+				console_zeichne_punkt(x, y, ' ');
 			}
 		}
 	}
 	refresh();
 }
-
 
 //Leere Terminal
 void console_leeren()

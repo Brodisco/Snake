@@ -87,38 +87,54 @@ void spiel_pruefe_kollission(Spiel* spiel_ptr)
 	char ergebnis = 0;
 
 	// 1) Schlange 1 Schlange 2 beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr);
+	if (element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr) == 1) {
+		spiel_ptr->s1_ptr->punkte = 0;
+		ergebnis += 1;
+	}
 
 	//2) Schlange 1 sich selbst beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
+	if (element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr) == 1) {
+		spiel_ptr->s1_ptr->punkte = 0;
+		ergebnis += 1;
+	}
 
 	// 3) Schlange 1 in den Rand beißt
 	int s1x = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x;
 	int s1y = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y;
 	// 3a) Linker oder Rechter Rand
 	if (s1x <= SPIELFELD_OFFSET_X + 1 || s1x >= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE)) {
+		spiel_ptr->s1_ptr->punkte = 0;
 		ergebnis += 1;
 	}
 	// 3b) Linker oder Rechter Rand
 	if (s1y <= SPIELFELD_OFFSET_Y + 1 || s1y >= (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE)) {
+		spiel_ptr->s1_ptr->punkte = 0;
 		ergebnis += 1;
 	}
 
 	// 4) Schlange 2 Schlange 1 beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr);
+	if (element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr) == 1) {
+		spiel_ptr->s2_ptr->punkte = 0;
+		ergebnis += 1;
+	}
 
 	// 5) Schlange 2 sich selbst beißt
-	ergebnis += element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
+	if (element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr) == 1) {
+		spiel_ptr->s2_ptr->punkte = 0;
+		ergebnis += 1;
+	}
 
 	// 6) Schlange 2 in den Rand beißt
 	int s2x = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x;
 	int s2y = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y;
 	// 6a) Linker oder Rechter Rand
 	if (s2x <= SPIELFELD_OFFSET_X + 1 || s2x >= (SPIELFELD_OFFSET_X + SPIELFELD_XSIZE)) {
+		spiel_ptr->s2_ptr->punkte = 0;
 		ergebnis += 1;
 	}
 	// 6b) Linker oder Rechter Rand
 	if (s2y <= SPIELFELD_OFFSET_Y + 1 || s2y >= (SPIELFELD_OFFSET_Y + SPIELFELD_YSIZE)) {
+		spiel_ptr->s2_ptr->punkte = 0;
 		ergebnis += 1;
 	}
 	if (ergebnis >= 1) {
@@ -126,9 +142,152 @@ void spiel_pruefe_kollission(Spiel* spiel_ptr)
 	}
 }
 
-void spiel_zeichne_spielstand()
-{
-	//Aufgabe 4e)     OPTIONAL
-	//TODO
+void spiel_zeichne_zahl(int zahl, int x_pos, int y_pos, int farbe) {
+	int numberfont[] = {
+			0,1,1,0,
+			1,0,0,1,
+			1,0,0,1,
+			1,0,0,1,
+			1,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			0,0,1,0,
+			0,1,1,0,
+			1,0,1,0,
+			0,0,1,0,
+			0,0,1,0,
+			0,0,1,0,
+			0,0,1,0,
+			0,1,1,0,
+			1,0,0,1,
+			0,0,0,1,
+			0,0,1,0,
+			0,1,0,0,
+			1,0,0,0,
+			1,1,1,1,
+			0,1,1,0,
+			1,0,0,1,
+			0,0,0,1,
+			0,0,1,0,
+			0,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			1,0,0,1,
+			1,0,0,1,
+			1,0,0,1,
+			1,1,1,1,
+			0,0,0,1,
+			0,0,0,1,
+			0,0,0,1,
+			1,1,1,1,
+			1,0,0,0,
+			1,0,0,0,
+			1,1,1,0,
+			0,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			0,1,1,0,
+			1,0,0,1,
+			1,0,0,0,
+			1,1,1,0,
+			1,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			1,1,1,1,
+			0,0,0,1,
+			0,0,0,1,
+			0,0,1,0,
+			0,0,1,0,
+			0,1,0,0,
+			0,1,0,0,
+			0,1,1,0,
+			1,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			1,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			0,1,1,0,
+			1,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			0,0,0,1,
+			1,0,0,1,
+			0,1,1,0,
+			0,0,0,0,
+			0,1,1,0,
+			0,1,1,0,
+			0,0,0,0,
+			0,1,1,0,
+			0,1,1,0,
+			0,0,0,0,
+			1,1,1,1,
+			1,1,1,1,
+			1,1,1,1,
+			1,1,1,1,
+			1,1,1,1,
+			1,1,1,1,
+			1,1,1,1
+	};
+	// 0: 00 - 27
+	// 1: 28 - 55
+
+	int offset = zahl * 28;
+
+
+	for (int y = 0; y < 7; y++) {
+		for (int x = 0; x < 4; x++) {
+			if (numberfont[x+4*y+offset] == 1) {
+				attron(COLOR_PAIR(farbe));
+				console_zeichne_punkt(x+x_pos, y+y_pos, ' ');
+			}
+		}
+	}
+}
+
+void spiel_zeichne_spielstand(Spiel* spiel_ptr) {
+ 	//Aufgabe 4e)     OPTIONAL
+	if (spiel_ptr == NULL) {
+		// Initialisierung des Spiels
+		spiel_zeichne_zahl(0, 31, 1, SPIELER_1_FARBE);
+		spiel_zeichne_zahl(0, 37, 1, SPIELER_1_FARBE);
+		spiel_zeichne_zahl(0, 43, 1, SPIELER_1_FARBE);
+		spiel_zeichne_zahl(10, 49, 1, SPIELFELD_RAND_FARBE);
+		spiel_zeichne_zahl(0, 55, 1, SPIELER_2_FARBE);
+		spiel_zeichne_zahl(0, 61, 1, SPIELER_2_FARBE);
+		spiel_zeichne_zahl(0, 67, 1, SPIELER_2_FARBE);
+	} else {
+		// Neuer Punktestand ...
+		// Schlange 1
+		// Alten Stand löschen
+		spiel_zeichne_zahl(11, 31, 1, SPIELFELD_HINTERGRUND_FARBE);
+		spiel_zeichne_zahl(11, 37, 1, SPIELFELD_HINTERGRUND_FARBE);
+		spiel_zeichne_zahl(11, 43, 1, SPIELFELD_HINTERGRUND_FARBE);
+
+		int punkte = spiel_ptr->s1_ptr->punkte;
+		// Neuen Spielstand zeichnen
+		spiel_zeichne_zahl(punkte%10, 43, 1, SPIELER_1_FARBE);
+		punkte = punkte/10;
+		spiel_zeichne_zahl(punkte%10, 37, 1, SPIELER_1_FARBE);
+		punkte = punkte/10;
+		spiel_zeichne_zahl(punkte%10, 31, 1, SPIELER_1_FARBE);
+
+		//bei Schlange 2
+		// Alten Stand löschen
+		spiel_zeichne_zahl(11, 55, 1, SPIELFELD_HINTERGRUND_FARBE);
+		spiel_zeichne_zahl(11, 61, 1, SPIELFELD_HINTERGRUND_FARBE);
+		spiel_zeichne_zahl(11, 67, 1, SPIELFELD_HINTERGRUND_FARBE);
+
+		punkte = spiel_ptr->s2_ptr->punkte;
+		// Neuen Spielstand zeichnen
+		spiel_zeichne_zahl(punkte%10, 67, 1, SPIELER_2_FARBE);
+		punkte = punkte/10;
+		spiel_zeichne_zahl(punkte%10, 61, 1, SPIELER_2_FARBE);
+		punkte = punkte/10;
+		spiel_zeichne_zahl(punkte%10, 55, 1, SPIELER_2_FARBE);
+
+		// Doppelpunkte zeichnen
+		spiel_zeichne_zahl(10, 49, 1, SPIELFELD_RAND_FARBE);
+	}
 }
 
