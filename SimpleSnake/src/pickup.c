@@ -25,13 +25,17 @@ Pickup *init_pickup()
 
 	pickup_ptr->time_intervall = 10000;
 
+	pickup_ptr->maxPickup = 10;
+	pickup_ptr->pickupAmount = 0;
+
 	return pickup_ptr;
 }
 
 
 void plaziere_Pickup(Spiel *spiel_ptr)
 {
-	if((clock() - spiel_ptr->pickup_ptr->last_time) >= spiel_ptr->pickup_ptr->time_intervall)
+	if( 	((clock() - spiel_ptr->pickup_ptr->last_time) >= spiel_ptr->pickup_ptr->time_intervall) &&
+			(spiel_ptr->pickup_ptr->pickupAmount < spiel_ptr->pickup_ptr->maxPickup))
 	{
 
 		Element *element = element_erzeugen();
@@ -50,6 +54,8 @@ void plaziere_Pickup(Spiel *spiel_ptr)
 		liste_einfuegen_kopf(spiel_ptr->pickup_ptr->pickup_list, element);
 
 		spiel_ptr->pickup_ptr->last_time = clock();
+
+		spiel_ptr->pickup_ptr->pickupAmount++;
 	}
 }
 
@@ -93,6 +99,7 @@ void handle_pickup_conflict(Spiel *spiel_ptr)
 	{
 		liste_entferne_element_at_adress(pickupListe, delete);
 		spiel_ptr->s1_ptr->wachsen++;
+		spiel_ptr->pickup_ptr->pickupAmount--;
 	}
 
 

@@ -46,7 +46,7 @@ int main(void) {
 	displaySettingsScreen(spiel_ptr, pixelList);
 
 
-	printPixelString(pixelList, "SNAKE BY OSZI", 50, 1, SPIELER_1_FARBE);
+	printPixelString(pixelList, "SNAKE BY OSZIMILIAN", 50, 1, SPIELER_1_FARBE);
 
 	spiel_zeichne_rand();
 
@@ -55,7 +55,7 @@ int main(void) {
 
 	while(1)
 	{
-
+		//spiel_ptr->winner = NULL;
 
 		while(spiel_ptr->run == 1)
 		{
@@ -99,13 +99,20 @@ int main(void) {
 			usleep(SPIEL_GESCHWINDIGKEIT);
 		}
 
+		//spiel_ptr = spiel_erzeugen();
+
+
 		displaySettingsScreen(spiel_ptr, pixelList);
 
 		printPixelString(pixelList, "SNAKE BY OSZI", 50, 1, SPIELER_1_FARBE);
 
 		spiel_zeichne_rand();
 
-		spiel_ptr->run = 1;
+		eingabe_init(eingabe_ptr);
+
+		resetGame(spiel_ptr);
+
+		spiel_init(spiel_ptr);
 	}
 
 	//Warte auf Tastendruck
