@@ -21,6 +21,10 @@ struct Eingabe
 {
 	char letzte_eingabe_spieler_1;
 	char letzte_eingabe_spieler_2;
+
+	int flushEnable;
+
+	char input;
 };
 typedef struct Eingabe Eingabe;
 
