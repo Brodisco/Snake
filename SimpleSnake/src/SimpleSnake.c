@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <time.h>
 #include "Schlange.h"
 #include "Console.h"
 #include "Eingabe.h"
@@ -49,6 +50,7 @@ int main(void) {
 	//Startet ncurses und initialisiert es
 	console_init();
 
+	srand(time(NULL));
 	//Zeichne den Spielfeldrand
 	spiel_zeichne_rand();
 
@@ -73,10 +75,22 @@ int main(void) {
 		schlange_bewege(spiel_ptr->s2_ptr, eingabe_ptr->letzte_eingabe_spieler_2);
 		schlange_zeichne(spiel_ptr->s2_ptr, SPIELER_2_FARBE);
 
-	//	schlange_bearbeite_pickup(spiel_ptr->s1_ptr);
-	//	schlange_bearbeite_pickup(spiel_ptr->s2_ptr);
 		//Prüfe auf Kollission => Relevant für Spielende
 		spiel_pruefe_kollission(spiel_ptr);
+		// Mario's code for pickups
+		/*
+		if(spiel_ptr->pickup_ptr == NULL)
+		{
+			attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
+			spiel_ptr->pickup_ptr = pickup_erstellen();
+			spiel_ptr->pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE + SPIELFELD_OFFSET_X;
+			spiel_ptr->pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE + SPIELFELD_OFFSET_Y;
+			console_zeichne_punkt(spiel_ptr->pickup_ptr->pos.x, spiel_ptr->pickup_ptr->pos.y, ' ');
+		}
+
+		schlange_bearbeite_pickup(spiel_ptr->s1_ptr, spiel_ptr->pickup_ptr);
+		schlange_bearbeite_pickup(spiel_ptr->s2_ptr, spiel_ptr->pickup_ptr);
+		*/
 
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;

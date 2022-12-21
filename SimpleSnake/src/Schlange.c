@@ -5,11 +5,11 @@
  *      Author: Benjamin Klaric
  */
 #include <stdlib.h>
-#include <time.h>
 #include "Configuration.h"
 #include "Schlange.h"
 #include "Console.h"
 #include <ncurses.h>
+#include "Spiel.h"
 
 /*
  * Initialisiert alle Attribute
@@ -100,28 +100,19 @@ void schlange_zeichne(Schlange* schlange_ptr, int farbe)
  * Die Funktion verändert die Schlange in Abhängigkeit des eingesammelten Pickups.
  * Alles ist denkbar. Beschleunigung, Wurmloch oder ähnliches.
  */
-void schlange_bearbeite_pickup(Schlange* schlange_ptr, char pickup)
+void schlange_bearbeite_pickup(Schlange* schlange_ptr, Pickup* pickup_ptr)
 {
-	attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
-	Element* element = element_erzeugen();
-	srand(time(NULL));
-	int min_x = SPIELFELD_OFFSET_X;
-	int max_x = SPIELFELD_XSIZE;
-	int min_y = SPIELFELD_OFFSET_Y;
-	int max_y = SPIELFELD_YSIZE;
-
-	element->pos.x = (rand()%(max_x - min_x + 1) + min_x);
-	element->pos.y = (rand()%(max_y - min_y + 1) + min_y);
-
-	console_zeichne_punkt(element->pos.x, element->pos.y, ' ');
-
-	char snickers = element_folge_pruefen(schlange_ptr->positionen_ptr->kopf_ptr, element);
-
-	if(snickers == 1)
-	{
-		schlange_ptr->wachsen++;
+	//Mario's code for pickups
+	/*
+	if (schlange_ptr->positionen_ptr->kopf_ptr->pos.x == pickup_ptr->pos.x && schlange_ptr->positionen_ptr->kopf_ptr->pos.y == pickup_ptr->pos.y) {
+		pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE+SPIELFELD_OFFSET_X;
+		pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE+SPIELFELD_OFFSET_Y;
+		pickUp_zeichne(pickup_ptr, FARBE_MAGENTA);
+		schlange_ptr->wachsen = 2;
 	}
+	*/
 }
+
 /*
  * Die Funktion sollte nach jeder Bewegung aufgerufen werden und zum Beispiel den
  * Punktestand in Abhängigkeit der Länge der Schlange oder der Spieldauer erhöhen.
