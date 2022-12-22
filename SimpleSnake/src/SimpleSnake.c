@@ -62,7 +62,7 @@ int main(void) {
 
 			//PickUps
 
-			//if(spiel_ptr->pickup_ptr == NULL) {
+			if(spiel_ptr->pickup_ptr == NULL) {
 				// Aktuell kein PickUp
 				spiel_ptr->pickup_ptr = pickUp_erzeugen();
 				Element* testElement_ptr = element_erzeugen();
@@ -76,10 +76,14 @@ int main(void) {
 				spiel_ptr->pickup_ptr->pos.y = testElement_ptr->pos.y;
 				free(testElement_ptr);
 				pickUp_zeichne(spiel_ptr->pickup_ptr, SPIELER_2_FARBE/*FARBE_MAGENTA*/);
-			//}
+			}
 
-			schlange_bearbeite_pickup(spiel_ptr->s1_ptr, spiel_ptr->pickup_ptr);
-			schlange_bearbeite_pickup(spiel_ptr->s2_ptr, spiel_ptr->pickup_ptr);
+			if(spiel_ptr->pickup_ptr != NULL) {
+				spiel_ptr->pickup_ptr = schlange_bearbeite_pickup(spiel_ptr->s1_ptr, spiel_ptr->pickup_ptr);
+			}
+			if(spiel_ptr->pickup_ptr != NULL) {
+				spiel_ptr->pickup_ptr = schlange_bearbeite_pickup(spiel_ptr->s2_ptr, spiel_ptr->pickup_ptr);
+			}
 
 			spiel_zeichne_spielstand(spiel_ptr);
 

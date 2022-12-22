@@ -9,6 +9,7 @@
 #include "Schlange.h"
 #include "Console.h"
 
+
 /*
  * Initialisiert alle Attribute
  */
@@ -84,16 +85,18 @@ void schlange_zeichne(Schlange* schlange_ptr, int farbe)
  * Die Funktion verändert die Schlange in Abhängigkeit des eingesammelten Pickups.
  * Alles ist denkbar. Beschleunigung, Wurmloch oder ähnliches.
  */
-void schlange_bearbeite_pickup(Schlange* schlange_ptr, PickUp* pickup_ptr)
+PickUp* schlange_bearbeite_pickup(Schlange* schlange_ptr, PickUp* pickup_ptr)
 {
 	//Aufgabe 3e) OPTIONAL
 	if (schlange_ptr->positionen_ptr->kopf_ptr->pos.x == pickup_ptr->pos.x && schlange_ptr->positionen_ptr->kopf_ptr->pos.y == pickup_ptr->pos.y) {
-		pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE-2+SPIELFELD_OFFSET_X+1;
-		pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE-2+SPIELFELD_OFFSET_Y+1;
-		pickUp_zeichne(pickup_ptr, FARBE_MAGENTA);
+		free(pickup_ptr);
 		schlange_ptr->wachsen = 2;
 		schlange_ptr->punkte += 3;
+		return NULL;
+	} else {
+		return pickup_ptr;
 	}
+
 }
 
 /*

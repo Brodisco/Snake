@@ -9,6 +9,7 @@
 #define SPIEL_H_
 #include "Schlange.h"
 #include "PickUp.h"
+
 struct Spiel
 {
 	Schlange* s1_ptr;
