@@ -2,7 +2,7 @@
  * Spiel.h
  *
  *  Created on: 12.12.2022
- *      Author: student
+ *      Author: Benjamin Klaric
  */
 
 #ifndef SPIEL_H_

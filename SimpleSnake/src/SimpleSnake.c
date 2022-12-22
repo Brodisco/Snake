@@ -83,14 +83,14 @@ int main(void) {
 		{
 			attron(COLOR_PAIR(SPIELFELD_RAND_FARBE));
 			spiel_ptr->pickup_ptr = pickup_erstellen();
-			spiel_ptr->pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE + SPIELFELD_OFFSET_X;
-			spiel_ptr->pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE + SPIELFELD_OFFSET_Y;
+			spiel_ptr->pickup_ptr->pos.x = rand()%(SPIELFELD_XSIZE - SPIELFELD_OFFSET_X) + SPIELFELD_OFFSET_X;
+			spiel_ptr->pickup_ptr->pos.y = rand()%(SPIELFELD_YSIZE - SPIELFELD_OFFSET_Y) + SPIELFELD_OFFSET_Y;
 			console_zeichne_punkt(spiel_ptr->pickup_ptr->pos.x, spiel_ptr->pickup_ptr->pos.y, ' ');
 		}
 
 		schlange_bearbeite_pickup(spiel_ptr->s1_ptr, spiel_ptr->pickup_ptr);
 		schlange_bearbeite_pickup(spiel_ptr->s2_ptr, spiel_ptr->pickup_ptr);
-		*/
+		 */
 
 		//Spielzeit erhöhen
 		spiel_ptr->schritte++;

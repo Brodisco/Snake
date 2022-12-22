@@ -61,6 +61,10 @@ void spiel_pruefe_kollission(Spiel* spiel_ptr)
 	char folge_2 = element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr);
 	char folge_3 = element_folge_pruefen(spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
 	char folge_4 = element_folge_pruefen(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->nachfolger_ptr);
+	int x_1 = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x;
+	int y_1 = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y;
+	int x_2 = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x;
+	int y_2 = spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y;
 
 		if(folge_1 == 1)
 		{
@@ -82,14 +86,14 @@ void spiel_pruefe_kollission(Spiel* spiel_ptr)
 			spiel_ptr->run = 0;
 		}
 
-		if((spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_OFFSET_X + 1) || (spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_OFFSET_Y + 1)
-				|| (spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_XSIZE - 1) || (spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_YSIZE - 1))
+		if((x_1 == SPIELFELD_OFFSET_X + 1) || (y_1 == SPIELFELD_OFFSET_Y + 1)
+				|| (x_1 == SPIELFELD_XSIZE - 1) || (y_1 == SPIELFELD_YSIZE - 1))
 		{
 			spiel_ptr->run = 0;
 		}
 
-		if((spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_OFFSET_X + 1) || (spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_OFFSET_Y + 1)
-				|| (spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.x == SPIELFELD_XSIZE - 1) || (spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr->pos.y == SPIELFELD_YSIZE - 1))
+		if((x_2 == SPIELFELD_OFFSET_X + 1) || (y_2 == SPIELFELD_OFFSET_Y + 1)
+				|| (x_2 == SPIELFELD_XSIZE - 1) || (y_2 == SPIELFELD_YSIZE - 1))
 		{
 			spiel_ptr->run = 0;
 		}

@@ -105,8 +105,8 @@ void schlange_bearbeite_pickup(Schlange* schlange_ptr, Pickup* pickup_ptr)
 	//Mario's code for pickups
 	/*
 	if (schlange_ptr->positionen_ptr->kopf_ptr->pos.x == pickup_ptr->pos.x && schlange_ptr->positionen_ptr->kopf_ptr->pos.y == pickup_ptr->pos.y) {
-		pickup_ptr->pos.x = rand()%SPIELFELD_XSIZE+SPIELFELD_OFFSET_X;
-		pickup_ptr->pos.y = rand()%SPIELFELD_YSIZE+SPIELFELD_OFFSET_Y;
+		pickup_ptr->pos.x = rand()%(SPIELFELD_XSIZE - SPIELFELD_OFFSET_X) + SPIELFELD_OFFSET_X;
+		pickup_ptr->pos.y = rand()%(SPIELFELD_YSIZE - SPIELFELD_OFFSET_Y) + SPIELFELD_OFFSET_Y;
 		pickUp_zeichne(pickup_ptr, FARBE_MAGENTA);
 		schlange_ptr->wachsen = 2;
 	}
