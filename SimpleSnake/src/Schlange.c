@@ -24,6 +24,12 @@ void schlange_init (Schlange* schlange_ptr)
 Schlange* schlange_erzeugen()
 {
 	Schlange *schlange_ptr = (Schlange*) malloc(sizeof(Schlange));
+	if (schlange_ptr == NULL)
+	{
+		fprintf(stderr, "Schlange konnte nicht erzeugt werden! \n");
+		return NULL;
+	}
+
 	schlange_init(schlange_ptr);
 	return schlange_ptr;
 }
@@ -67,9 +73,6 @@ void schlange_bewege (Schlange* schlange_ptr, int richtung)
 
 void setNewSnakeHeadPosition(Schlange *schlange_ptr, int x, int y)
 {
-	//liste_einfuegen_kopf(schlange_ptr->positionen_ptr, liste_entferne_ende(schlange_ptr->positionen_ptr));
-	//schlange_ptr->positionen_ptr->laenge--;
-
 	schlange_ptr->positionen_ptr->kopf_ptr->pos.x = x;
 	schlange_ptr->positionen_ptr->kopf_ptr->pos.y  = y;
 }
@@ -81,7 +84,7 @@ void schlange_zeichne(Schlange *schlange_ptr, int farbe)
 {
 	Element *element_ptr = schlange_ptr->positionen_ptr->kopf_ptr;
 	attron(COLOR_PAIR(farbe));
-	while(element_ptr->nachfolger_ptr != NULL)
+	while(element_ptr != NULL)
 	{
 		console_zeichne_punkt(element_ptr->pos.x, element_ptr->pos.y, ' ');
 		element_ptr = element_ptr->nachfolger_ptr;

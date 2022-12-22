@@ -19,6 +19,12 @@ Pickup *init_pickup()
 {
 	Pickup *pickup_ptr = (Pickup*) malloc(sizeof(Pickup));
 
+	if (pickup_ptr == NULL)
+	{
+		fprintf(stderr, "Pickup konnte nicht erzeugt werden! \n");
+		return NULL;
+	}
+
 	pickup_ptr->pickup_list = liste_erzeugen();
 
 	pickup_ptr->last_time = clock();
@@ -48,7 +54,7 @@ void plaziere_Pickup(Spiel *spiel_ptr)
 			element->pos.x = SPIELFELD_OFFSET_X + 1 + rand() % (SPIELFELD_XSIZE - 1);
 			element->pos.y = SPIELFELD_OFFSET_Y + 1 + rand() % (SPIELFELD_YSIZE - 1);
 
-		}while(element_folge_pruefen(element, snake1) || element_folge_pruefen(element, snake2));
+		}while(element_folge_pruefen(element, snake1) || element_folge_pruefen(element, snake2) );
 
 
 		liste_einfuegen_kopf(spiel_ptr->pickup_ptr->pickup_list, element);
@@ -89,6 +95,7 @@ void handle_pickup_conflict(Spiel *spiel_ptr)
 	{
 		liste_entferne_element_at_adress(pickupListe, delete);
 		spiel_ptr->s2_ptr->wachsen++;
+		spiel_ptr->pickup_ptr->pickupAmount--;
 	}
 
 	pickup = spiel_ptr->pickup_ptr->pickup_list->kopf_ptr;
@@ -101,10 +108,6 @@ void handle_pickup_conflict(Spiel *spiel_ptr)
 		spiel_ptr->s1_ptr->wachsen++;
 		spiel_ptr->pickup_ptr->pickupAmount--;
 	}
-
-
-
-
 
 }
 

@@ -61,24 +61,48 @@ void pushWormholeElement(WormholeList *list, WormholeElement *element)
 	}
 }
 
-WormholeElement *checkSnakeWormholeCollision(Element *snake_ptr, WormholeElement *wormhole_ptr)
+void removeWormholeElement(WormholeList *liste_ptr, WormholeElement *element_ptr)
 {
+	WormholeElement *local_element = liste_ptr->head;
 
-	int snakeX = snake_ptr->pos.x;
-	int snakeY = snake_ptr->pos.y;
-
-	while(wormhole_ptr != NULL)
+	while(local_element != NULL)
 	{
-		if ( (snakeX == wormhole_ptr->x1 && snakeY == wormhole_ptr->y1) || (snakeX == wormhole_ptr->x2 && snakeY == wormhole_ptr->y2))
+		if(local_element == element_ptr)
 		{
-			return wormhole_ptr;
+			if (liste_ptr->leangh == 1)
+			{
+				liste_ptr->head = NULL;
+				liste_ptr->tail = NULL;
+				liste_ptr->leangh--;
+			}
+			else if (local_element->prev == NULL)
+			{
+				liste_ptr->head = local_element->next;
+				local_element->next->prev = NULL;
+				liste_ptr->leangh--;
+			}
+
+			else if (local_element->next == NULL)
+			{
+				liste_ptr->tail = local_element->prev;
+				local_element->prev->next = NULL;
+				liste_ptr->leangh--;
+			}
+			else{
+				local_element->prev->next = local_element->next;
+				local_element->next->prev = local_element->prev;
+				liste_ptr->leangh--;
+			}
+
+			free(local_element);
+
+			return;
+
 		}
-		wormhole_ptr = wormhole_ptr->next;
+
+		local_element = local_element->next;
 	}
-
-	return NULL;
 }
-
 
 Wormhole *initWormhole()
 {
@@ -89,8 +113,9 @@ Wormhole *initWormhole()
 		return NULL;
 	}
 
-	WormholeList *wormholeList = createWormholeList();
-	wormhole->wormholeList_ptr = wormholeList;
+	//WormholeList *wormholeList = createWormholeList();
+	//wormhole->wormholeList_ptr = wormholeList;
+	wormhole->wormholeList_ptr = createWormholeList();
 	wormhole->last_time = clock();
 	wormhole->time_intervall = 50000;
 	wormhole->wormholeAmount = 0;
@@ -138,60 +163,31 @@ void printWormhole(Spiel *spiel_ptr, int farbe)
 	}
 }
 
-void removeWormholeElement(WormholeList *liste_ptr, WormholeElement *element_ptr)
+WormholeElement *checkSnakeWormholeCollision(Element *snake_ptr, WormholeElement *wormhole_ptr)
 {
-	WormholeElement *local_element = liste_ptr->head;
 
-	while(local_element != NULL)
+	int snakeX = snake_ptr->pos.x;
+	int snakeY = snake_ptr->pos.y;
+
+	while(wormhole_ptr != NULL)
 	{
-		if(local_element == element_ptr)
+		if ( (snakeX == wormhole_ptr->x1 && snakeY == wormhole_ptr->y1) || (snakeX == wormhole_ptr->x2 && snakeY == wormhole_ptr->y2))
 		{
-			if (liste_ptr->leangh == 1)
-			{
-				liste_ptr->head = NULL;
-				liste_ptr->tail = NULL;
-				liste_ptr->leangh--;
-			}
-			else if (local_element->prev == NULL)
-			{
-				liste_ptr->head = local_element->next;
-				local_element->next->prev = NULL;
-				liste_ptr->leangh--;
-			}
-
-			else if (local_element->next == NULL)
-			{
-				liste_ptr->tail = local_element->prev;
-				local_element->prev->next = NULL;
-				liste_ptr->leangh--;
-			}
-			else{
-				local_element->prev->next = local_element->next;
-				local_element->next->prev = local_element->prev;
-				liste_ptr->leangh--;
-			}
-
-			free(local_element);
-
-			return;
-
+			return wormhole_ptr;
 		}
-
-		local_element = local_element->next;
+		wormhole_ptr = wormhole_ptr->next;
 	}
+
+	return NULL;
 }
 
 
 void handleWormholeCollision(Spiel *spiel_ptr)
 {
-	Element *schlangen_kopf_ptr = NULL;
-	WormholeElement *wormhole_head_ptr = NULL;
-	WormholeElement *wormhole_element_ptr = NULL;
+	Element *schlangen_kopf_ptr = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr;
+	WormholeElement *wormhole_head_ptr = spiel_ptr->wormhole_ptr->wormholeList_ptr->head;
+	WormholeElement *wormhole_element_ptr = checkSnakeWormholeCollision(schlangen_kopf_ptr, wormhole_head_ptr);
 
-	schlangen_kopf_ptr = spiel_ptr->s1_ptr->positionen_ptr->kopf_ptr;
-	wormhole_head_ptr =spiel_ptr->wormhole_ptr->wormholeList_ptr->head;
-
-	wormhole_element_ptr = checkSnakeWormholeCollision(schlangen_kopf_ptr, wormhole_head_ptr);
 
 	if (wormhole_element_ptr != NULL)
 	{
@@ -213,7 +209,7 @@ void handleWormholeCollision(Spiel *spiel_ptr)
 
 	wormhole_element_ptr = checkSnakeWormholeCollision(schlangen_kopf_ptr, wormhole_head_ptr);
 
-	if (checkSnakeWormholeCollision(spiel_ptr->s2_ptr->positionen_ptr->kopf_ptr, spiel_ptr->wormhole_ptr->wormholeList_ptr->head))
+	if (wormhole_element_ptr != NULL)
 	{
 		if (schlangen_kopf_ptr->pos.x == wormhole_element_ptr->x1 && schlangen_kopf_ptr->pos.y == wormhole_element_ptr->y1)
 		{

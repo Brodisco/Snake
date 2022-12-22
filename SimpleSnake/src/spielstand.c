@@ -57,7 +57,7 @@ void update_Spielstand(Spielstand *spielstand_ptr, Spiel *spiel_ptr, CharacterLi
 	int laenge_spieler1 = spiel_ptr->s1_ptr->positionen_ptr->laenge;
 	int laenge_spieler2 = spiel_ptr->s2_ptr->positionen_ptr->laenge;
 
-	mvprintw(10,10, "(%d) (%d) ", laenge_spieler1, laenge_spieler2);
+	//mvprintw(10,10, "(%d) (%d) ", laenge_spieler1, laenge_spieler2);
 
 
 	if (laenge_spieler1 > SPIEL_SCHLANGEN_LAENGE && laenge_spieler2 > SPIEL_SCHLANGEN_LAENGE)
