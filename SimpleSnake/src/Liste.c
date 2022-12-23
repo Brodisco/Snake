@@ -37,4 +37,3 @@ Element* liste_entferne_ende(Liste* liste_ptr)
 
 	return letzteElement_ptr;
 }
-

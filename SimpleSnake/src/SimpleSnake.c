@@ -50,7 +50,7 @@ int main(void) {
 	//Startet ncurses und initialisiert es
 	console_init();
 
-	srand(time(NULL));
+	//srand(time(NULL));
 	//Zeichne den Spielfeldrand
 	spiel_zeichne_rand();
 

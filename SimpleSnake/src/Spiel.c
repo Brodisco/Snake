@@ -104,4 +104,3 @@ void spiel_zeichne_spielstand()
 	//Aufgabe 4e)     OPTIONAL
 	//TODO
 }
-

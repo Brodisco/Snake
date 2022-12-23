@@ -19,7 +19,7 @@ char element_folge_pruefen (Element* pruef_ptr, Element* e_ptr)
 
 	char Ergebnis = 0;
 
-	while(e_ptr->nachfolger_ptr != NULL)
+	while(e_ptr != NULL)
 	{
 		if((pruef_ptr->pos.x == e_ptr->pos.x) && (pruef_ptr->pos.y == e_ptr->pos.y))
 		{
@@ -30,4 +30,3 @@ char element_folge_pruefen (Element* pruef_ptr, Element* e_ptr)
 	}
 	return Ergebnis;
 }
-
