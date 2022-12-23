@@ -75,7 +75,7 @@ int main(void) {
 				spiel_ptr->pickup_ptr->pos.x = testElement_ptr->pos.x;
 				spiel_ptr->pickup_ptr->pos.y = testElement_ptr->pos.y;
 				free(testElement_ptr);
-				pickUp_zeichne(spiel_ptr->pickup_ptr, SPIELER_2_FARBE/*FARBE_MAGENTA*/);
+				pickUp_zeichne(spiel_ptr->pickup_ptr, FARBE_MAGENTA);
 			}
 
 			if(spiel_ptr->pickup_ptr != NULL) {
